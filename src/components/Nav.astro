@@ -1,0 +1,37 @@
+<nav class="nav" aria-label="Main navigation">
+	<a href="/about" class="nav-link">About</a>
+	<a href="/projects" class="nav-link">Projects</a>
+	<a href="/photography" class="nav-link">Photography &amp; other mediums</a>
+	<a href="/blog" class="nav-link">Blog</a>
+	<a href="/resume" class="nav-link">Resume</a>
+</nav>
+
+<style>
+	.nav {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		padding-top: 8px;
+	}
+
+	.nav-link {
+		font-size: 1.1rem;
+		font-weight: 400;
+		color: #1a1a1a;
+		padding: 10px 0;
+		position: relative;
+
+	}
+
+	.nav-link:hover::before {
+		content: '';
+		position: absolute;
+		bottom: 8px;
+		left: -20px;
+		width: 12px;
+		height: 65%;
+		background: #e8a020;
+	}
+
+
+</style>
