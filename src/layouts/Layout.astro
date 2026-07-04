@@ -1,37 +1,74 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content="Guillaume Técher — designer, photographer, and writer." />
-		<title>Guillaume Técher</title>
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Young+Serif&display=swap" rel="stylesheet">
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content="Guillaume Técher — Personal website" />
+    <title>Guillaume Técher</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Young+Serif&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="layout-container">
+      <slot />
+    </div>
+  </body>
 </html>
 
 <style is:global>
-	*, *::before, *::after {
-		box-sizing: border-box;
-		margin: 0;
-		padding: 0;
-	}
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-	html, body {
-		width: 100%;
-		min-height: 100%;
-		max-width: 1200px;
-		margin: auto;
-		color: #1a1a1a;
-		font-family: 'Inter', sans-serif;
-	}
+  html,
+  body {
+    width: 100%;
+    min-height: 100%;
+    color: #1a1a1a;
+    font-family: "Inter", sans-serif;
+  }
 
-	
+  .layout-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 80px;
+  }
+
+  @media (max-width: 1200px) {
+    .layout-container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 0 60px;
+    }
+  }
+
+   @media (max-width: 600px) {
+    .layout-container {
+
+      padding: 0 20px;
+    }
+  }
+
+  /* astro-lqip: keep the blurry overlay ON TOP of the img while it streams in.
+	   The img has z-index:1; the ::after starts at --z-index (0 by default).
+	   Setting it to 2 means the placeholder covers the partially-decoded image.
+	   Once onload fires, astro-lqip resets --z-index to 1 and --opacity to 0. */
+  [data-astro-lqip] {
+    --z-index: 2;
+  }
+  [data-astro-lqip]::after {
+    filter: blur(10px);
+    transform: scale(1.2);
+  }
 </style>

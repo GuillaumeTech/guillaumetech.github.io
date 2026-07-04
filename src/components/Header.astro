@@ -16,7 +16,7 @@ const { greeting } = Astro.props;
 	<Nav />
 
 	<div class="greeting" aria-label="Greeting">
-		<span class="greeting-text">{greeting}</span>
+		<h1 class="greeting-text">{greeting}</h1>
 	</div>
 </header>
 
@@ -26,19 +26,21 @@ const { greeting } = Astro.props;
 	   The greeting is pushed to the bottom-right via grid.
 	──────────────────────────────────────────────────────── */
 	.site-header {
+			padding-bottom: 32px;
+
 		display: grid;
 		grid-template-columns: 1fr 2fr;
 		grid-template-rows: auto 1fr;
 		grid-template-areas:
 			"logo     ."
 			"nav      greeting";
-		padding: 48px 80px 0;
 	}
 
 	/* ── LOGO ─────────────────────────────────────────────── */
 	.logo {
 		grid-area: logo;
-		padding-bottom: 40px;
+		padding-bottom: 20px;
+		padding-top: 40px;
 	}
 
 	.logo-name {
@@ -46,7 +48,6 @@ const { greeting } = Astro.props;
 
 		font-size: 1.5rem;
 		font-weight: 600;
-		letter-spacing: -0.01em;
 		color: #1a1a1a;
 		text-decoration: none;
 	}
@@ -71,7 +72,7 @@ const { greeting } = Astro.props;
 	}
 
 	/* ── RESPONSIVE ───────────────────────────────────────── */
-	@media (max-width: 900px) {
+	@media (max-width: 1000px) {
 		.site-header {
 			grid-template-columns: 1fr;
 			grid-template-rows: auto auto auto;
@@ -79,28 +80,35 @@ const { greeting } = Astro.props;
 				"logo"
 				"nav"
 				"greeting";
-			padding: 32px 24px 0;
 			min-height: unset;
 		}
 
 		.greeting {
 			justify-content: flex-start;
 			padding-top: 32px;
-			padding-bottom: 32px;
+
+		}
+
+		.greeting-text {
+			font-size: 1.7rem;
 		}
 	}
 
 	@media (max-width: 600px) {
 		.site-header {
-			padding: 24px 16px 0;
+			padding: 24px 0;
 		}
 
 		.logo-name {
-			font-size: 1.1rem;
+			font-size: 1.4rem;
 		}
 
+		.logo {
+		padding-top: 20px;
+	}
+
 		.greeting-text {
-			font-size: 2.2rem;
+			font-size: 1.5rem;
 		}
 	}
 </style>

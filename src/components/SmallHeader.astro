@@ -1,0 +1,71 @@
+
+<header class="site-header">
+	<div class="logo">
+		<a href="/" class="logo-name">Guillaume Técher</a>
+	</div>
+	<div class="separator"></div>
+	<!-- only using for blog, now, I'll add props when i need -->
+	<div class="subsection">
+		<a href="/blog">Blog</a>
+	</div>
+</header>
+
+<style>
+
+	.separator {
+		position: relative;
+		width: 12px;
+		height: 1.7rem;
+		background: #e8a020;
+		bottom: -4px;
+	}
+
+	.subsection a {
+		font-size: 1.2rem;
+		font-weight: 400;
+		color: #1a1a1a;
+		position: relative;
+		bottom: -4px;
+		text-decoration: none;
+	}
+
+	.site-header {
+		display: flex;
+		gap: 1.2rem;
+	}
+
+	.logo {
+		padding-bottom: 40px;
+	}
+
+	.logo-name {
+				font-family: 'Young Serif', Georgia, serif;
+
+		font-size: 1.5rem;
+		font-weight: 600;
+		letter-spacing: -0.01em;
+		color: #1a1a1a;
+		text-decoration: none;
+	}
+
+
+	/* ── RESPONSIVE ───────────────────────────────────────── */
+	@media (max-width: 900px) {
+		.site-header {
+			grid-template-columns: 1fr;
+			grid-template-rows: auto auto auto;
+			grid-template-areas:
+				"logo"
+				"nav"
+				"greeting";
+			min-height: unset;
+		}
+	}
+
+	@media (max-width: 600px) {
+		.site-header {
+					padding-top: 20px;
+
+		}
+	}
+</style>

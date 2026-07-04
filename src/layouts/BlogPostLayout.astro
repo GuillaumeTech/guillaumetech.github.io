@@ -1,0 +1,45 @@
+---
+const { frontmatter } = Astro.props;
+import SmallHeader from '../components/SmallHeader.astro';
+import Layout from './Layout.astro';
+
+---
+
+<Layout>
+      <SmallHeader />
+      <article>
+        <h1>{frontmatter.title}</h1>
+        <p>{frontmatter.intro}</p>
+        <div class="content">
+          <slot />
+        </div>
+      </article>
+    </Layout>
+
+
+<!-- global style so the style reach within the slots
+ not ideal but also this is only used with blogpost as implied by the name
+ so not that bad
+-->
+<style is:global>
+  h1{
+    font-family: "Young Serif", Georgia, serif;
+  }
+
+  article p {
+    margin-top: 15px;
+    margin-bottom: 30px;
+  }
+
+
+  .content {
+		width: 70%;
+    max-width: 800px;
+  }
+  @media (max-width: 900px) {
+    .content {
+
+    	width: 100%;
+    }
+  }
+</style>

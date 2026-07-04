@@ -1,0 +1,33 @@
+<section class="grid">
+  <slot />
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 300px);
+    grid-auto-rows: 200px;
+    gap: calc((1040px - (3 * 300px)) / 2);
+    padding: 60px 0;
+  }
+
+  @media (max-width: 1200px) {
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 260px);
+      grid-auto-rows: 173px;
+      gap: calc((880px - (3 * 250px)) / 2);
+    padding: 40px 0;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    .grid {
+      display: flex;
+      flex-direction: column;
+      gap: 32px 0;
+         padding: 20px 0;
+
+    }
+  }
+</style>
