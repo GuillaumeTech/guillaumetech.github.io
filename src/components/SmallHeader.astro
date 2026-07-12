@@ -1,7 +1,9 @@
+---
+import Logo from "./Logo.astro";
+---
+
 <header class="site-header">
-  <div class="logo">
-    <a href="/" class="logo-name">Guillaume Técher</a>
-  </div>
+  <Logo />
   <div class="separator"></div>
   <!-- only using for blog, now, add props when needed-->
   <div class="subsection">
@@ -10,45 +12,40 @@
 </header>
 
 <style>
+  .site-header {
+    display: flex;
+    gap: 1.2rem;
+    padding-top: 100px;
+    padding-bottom: 70px;
+    align-items: baseline;
+  }
+
   .separator {
     position: relative;
     width: 12px;
     height: 1.7rem;
     background: #e8a020;
-    bottom: -4px;
+align-self: center;
   }
 
   .subsection a {
     font-size: 1.2rem;
     font-weight: 400;
     color: #1a1a1a;
-    position: relative;
-    bottom: -4px;
     text-decoration: none;
   }
 
-  .site-header {
-    display: flex;
-    gap: 1.2rem;
-  }
-
-  .logo {
-    padding-bottom: 40px;
-  }
-
-  .logo-name {
-    font-family: "Young Serif", Georgia, serif;
-
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    color: #1a1a1a;
-    text-decoration: none;
+  @media (max-width: 1000px) {
+    .site-header {
+      padding-top: 60px;
+    }
+    
   }
 
   @media (max-width: 600px) {
     .site-header {
-      padding-top: 20px;
+      padding: 24px 0;
     }
+   
   }
 </style>

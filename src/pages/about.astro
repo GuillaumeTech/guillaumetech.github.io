@@ -1,71 +1,92 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Greetings from "../components/Greetings.astro";
+import Logo from "../components/Logo.astro";
+import Nav from "../components/Nav.astro";
 ---
 
 <Layout>
-	<Header greeting="Who am I" />
 
-	<main class="page-content">
-		<section class="text-grid" aria-label="Introduction">
-			<div class="text-col">
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-			</div>
-			<div class="text-col">
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-				<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-			</div>
-			<div class="text-col">
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-				<p>cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p>
-				<p>cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p>
-				<p>cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p>
-			</div>
-		</section>
-	</main>
+  <Header  >
+	<Logo/>
+	<Nav/>
+	<Greetings greeting="Who am i" />
+  </Header>
+
+  <main class="page-content">
+    <section class="text-grid" aria-label="Introduction">
+      <div class="text-col">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum
+        </p>
+      </div>
+      <div class="text-col">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam.
+        </p>
+        <p>
+          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est
+          laborum
+        </p>
+      </div>
+      <div class="text-col">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+          enim ad minim veniam.
+        </p>
+        <p>
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+          cupidatat non
+        </p>
+        <p>
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+          cupidatat non
+        </p>
+        <p>
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+          cupidatat non
+        </p>
+      </div>
+    </section>
+  </main>
 </Layout>
 
 <style>
-	.page-content {
-		padding: 60px 0;
-	   
-	}
+  .text-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0 48px;
+  }
 
-	/* ── TEXT GRID ───────────────────────────────────────── */
-	.text-grid {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 0 48px;
-	}
+  .text-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    p {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: #2a2a2a;
+    }
+  }
 
-	.text-col {
-		display: flex;
-		flex-direction: column;
-		gap: 20px;
-		  p {
-		font-size: 0.9rem;
-		line-height: 1.75;
-		color: #2a2a2a;
-	}
-	}
-
-
-
-	/* ── RESPONSIVE ──────────────────────────────────────── */
-	@media (max-width: 900px) {
-		.page-content {
-			padding: 40px 24px 60px;
-		}
-
-		.text-grid {
-			grid-template-columns: 1fr;
-			gap: 32px 0;
-		}
-	}
-
-	@media (max-width: 600px) {
-		.page-content {
-			padding: 30px 0;
-		}
-	}
+  @media (max-width: 900px) {
+    .text-grid {
+      grid-template-columns: 1fr;
+      gap: 32px 0;
+    }
+  }
 </style>

@@ -1,0 +1,44 @@
+---
+interface Props {
+  greeting: string;
+}
+
+const { greeting } = Astro.props;
+---
+
+<div class="greeting">
+  <h1 class="greeting-text">{greeting}</h1>
+</div>
+
+<style>
+  .greeting {
+    grid-area: greeting;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  .greeting-text {
+    font-family: "Young Serif", Georgia, serif;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  /* ── RESPONSIVE ───────────────────────────────────────── */
+  @media (max-width: 1000px) {
+    .greeting {
+      justify-content: flex-start;
+      padding-top: 32px;
+    }
+
+    .greeting-text {
+      font-size: 1.7rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .greeting-text {
+      font-size: 1.5rem;
+    }
+  }
+</style>

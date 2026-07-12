@@ -4,11 +4,18 @@ import Header from "../components/Header.astro";
 import Grid from "../components/Grid.astro";
 import Cell from "../components/Cell.astro";
 import BodyText from "../components/BodyText.astro";
+import Greetings from "../components/Greetings.astro";
+import Logo from "../components/Logo.astro";
+import Nav from "../components/Nav.astro";
 const posts = Object.values(import.meta.glob("./posts/*.md", { eager: true }));
 ---
 
 <Layout>
-  <Header greeting="Thoughts & Ideas" />
+	  <Header  >
+	<Logo/>
+	<Nav/>
+	<Greetings greeting="Thoughts & Ideas" />
+  </Header>
 
   <main class="page-content">
     <Grid>
