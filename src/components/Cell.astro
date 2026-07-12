@@ -1,0 +1,25 @@
+---
+interface Props {
+  width?: number;
+  height?: number;
+}
+const { width = 1, height = 1 } = Astro.props;
+---
+
+<div class="cell">
+  <slot />
+</div>
+
+<style define:vars={{ width, height }}>
+    
+  .cell {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    overflow: hidden;
+    grid-column: span var(--width);
+    grid-row: span var(--height);
+  }
+
+
+</style>

@@ -1,0 +1,32 @@
+---
+interface Props {
+  text?: string;
+}
+
+const { text } = Astro.props;
+---
+
+<div class="separator">
+  <span>{text}</span>
+  <hr />
+</div>
+
+<style>
+  .separator {
+    font-family: "Young Serif", Georgia, serif;
+    flex-direction: row;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    hr {
+      width: 100%;
+      height: 1px;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    .separator {
+      padding: 2rem 0;
+    }
+  }
+</style>

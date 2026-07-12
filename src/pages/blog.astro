@@ -2,6 +2,8 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Grid from "../components/Grid.astro";
+import Cell from "../components/Cell.astro";
+import BodyText from "../components/BodyText.astro";
 const posts = Object.values(import.meta.glob("./posts/*.md", { eager: true }));
 ---
 
@@ -12,12 +14,12 @@ const posts = Object.values(import.meta.glob("./posts/*.md", { eager: true }));
     <Grid>
       {
         posts.map((post: any) => (
-          <li class="post-cell">
+          <Cell>
             <a href={post.url}>
               <h4>{post.frontmatter.title}</h4>
-              <p>{post.frontmatter.intro}</p>
+              <BodyText>{post.frontmatter.intro}</BodyText>
             </a>
-          </li>
+          </Cell>
         ))
       }
     </Grid>
@@ -30,24 +32,6 @@ const posts = Object.values(import.meta.glob("./posts/*.md", { eager: true }));
       color: #2a2a2a;
       text-decoration: none;
     }
-  }
-
-  .post-cell {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .post-cell p {
-    font-size: 0.9rem;
-    line-height: 1.75;
-    color: #2a2a2a;
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
   }
 
 </style>

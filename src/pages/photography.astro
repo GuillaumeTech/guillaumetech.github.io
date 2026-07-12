@@ -7,6 +7,8 @@ import car from "../assets/car.jpg";
 import tree from "../assets/tree.jpg";
 import building from "../assets/building.jpg";
 import Grid from "../components/Grid.astro";
+import Cell from "../components/Cell.astro";
+import BodyText from "../components/BodyText.astro";
 ---
 
 <Layout>
@@ -14,9 +16,9 @@ import Grid from "../components/Grid.astro";
 
   <main class="page-content">
     <Grid>
-      <div class="post-cell span-w-2">
+      <Cell width={2} >
         <h4>Lorem Ipsum</h4>
-        <p>
+        <BodyText>
           Losrem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -24,9 +26,10 @@ import Grid from "../components/Grid.astro";
           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
           culpa qui officia deserunt mollit anim id est laborum
-        </p>
-      </div>
+        </BodyText>
+      </Cell>
 
+	   <Cell >
       <a
         style={`--width: ${car.width}; --height: ${car.height};`}
         href={car.src}
@@ -36,6 +39,9 @@ import Grid from "../components/Grid.astro";
       >
         <Image src={car} alt="A description of my image."  loading={"eager"} />
       </a>
+	  </Cell>
+	   <Cell >
+
       <a
         style={`--width: ${tree.width}; --height: ${tree.height};`}
         href={tree.src}
@@ -45,6 +51,8 @@ import Grid from "../components/Grid.astro";
       >
         <Image src={tree} alt="A description of my image."  loading={"eager"}/>
       </a>
+	  </Cell>
+ <Cell >
       <a
         style={`--width: ${building.width}; --height: ${building.height};`}
         href={building.src}
@@ -54,10 +62,23 @@ import Grid from "../components/Grid.astro";
       >
         <Image src={building} alt="A description of my image." loading={"eager"}/>
       </a>
+	  </Cell>
 
       <div class="post-cell">
         <Image src={car} alt="A description of my image." />
       </div>
+
+	    <Cell height={2} width={2} >
+      <a
+        style={`--width: ${car.width}; --height: ${car.height};`}
+        href={car.src}
+        target="_blank"
+        data-fancybox
+        class="post-cell"
+      >
+        <Image src={car} alt="A description of my image."  loading={"eager"} />
+      </a>
+	  </Cell>
       <div class="post-cell span-w-2 span-h-2">
         <Image src={car} alt="A description of my image." />
       </div><div class="post-cell">
@@ -65,18 +86,25 @@ import Grid from "../components/Grid.astro";
       </div><div class="post-cell">
         <Image src={car} alt="A description of my image." />
       </div>
-      <div class="post-cell span-h-2">
+       <Cell height={2}>
+
         <h4>Lorem Ipsum</h4>
-        <p class="long">
+
+        <BodyText>
           Losrem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
           aliquip ex ea commodo consequat. Duis aute irure dolor in
           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident, sunt in
+     
+		  Excepteur sint occaecat cupidatat non proident, sunt in
           culpa qui officia deserunt mollit anim id est laborum
-        </p>
-      </div>
+        </BodyText>
+	</Cell >
+
       <div class="post-cell">
         <Image src={car} alt="A description of my image." />
       </div>
@@ -118,51 +146,14 @@ import Grid from "../components/Grid.astro";
 
  
 
-  .post-cell {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    &.span-w-2 {
-      grid-column: span 2;
-    }
-    &.span-h-2 {
-      grid-row: span 2;
-    }
-  }
 
-  .post-cell :global([data-astro-lqip]) {
-    width: 100%;
-    height: 100%;
-  }
-
-  .post-cell img {
+  a img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
   }
 
-  .post-cell p {
-    font-size: 0.9rem;
-    line-height: 1.75;
-    color: #2a2a2a;
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .post-cell p.long {
-    font-size: 0.9rem;
-    line-height: 1.75;
-    color: #2a2a2a;
-    display: -webkit-box;
-    -webkit-line-clamp: 20;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
 
 
 </style>
