@@ -1,5 +1,9 @@
+---
+const isHome = Astro.url.pathname === "/";
+---
+
 <div class="logo">
-  <a href="/" class="logo-name">Guillaume Técher</a>
+  <a href="/" class:list={["logo-name", { active: isHome }]} aria-current={isHome ? "page" : undefined}>Guillaume Técher</a>
 </div>
 
 <style>
@@ -11,14 +15,34 @@
     font-family: "Young Serif", Georgia, serif;
     font-size: 1.5rem;
     font-weight: 600;
-        color: var(--primary-text-color);
+    color: var(--primary-text-color);
 
     text-decoration: none;
+    position: relative;
+  }
+
+  .logo-name:hover::before,
+  .logo-name.active::before {
+    content: "";
+    position: absolute;
+    left: -20px;
+    width: 12px;
+    height: 2rem;
+    background-color: var(--accent-color-home);
   }
 
   @media (max-width: 600px) {
     .logo-name {
       font-size: 1.3rem;
+
     }
+
+    .logo-name:hover::before,
+  .logo-name.active::before {
+
+        height: 1.7rem;
+
+  }
   }
 </style>
+

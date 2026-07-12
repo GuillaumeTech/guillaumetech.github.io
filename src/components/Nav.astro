@@ -1,9 +1,29 @@
+---
+const pathname = Astro.url.pathname;
+
+const links = [
+  { href: "/about", label: "About" },
+  { href: "/projects", label: "Projects" },
+  { href: "/photography", label: "Photography & other mediums" },
+  { href: "/blog", label: "Blog" },
+//   TODO: { href: "/resume", label: "Resume" },
+];
+---
+
 <nav class="nav" aria-label="Main navigation">
-  <a href="/about" class="nav-link">About</a>
-  <a href="/projects" class="nav-link">Projects</a>
-  <a href="/photography" class="nav-link">Photography & other mediums</a>
-  <a href="/blog" class="nav-link">Blog</a>
-  <!-- TODO: <a href="/resume" class="nav-link">Resume</a> -->
+  {links.map(({ href, label }) => {
+    const isActive = pathname === href || pathname.startsWith(href + "/");
+    return (
+      <a
+        href={href}
+        class:list={["nav-link", { active: isActive }]}
+        aria-current={isActive ? "page" : undefined}
+      >
+        {label}
+      </a>
+    );
+  })}
+
 </nav>
 
 <style>
@@ -23,7 +43,8 @@
     position: relative;
   }
 
-  .nav-link:hover::before {
+  .nav-link:hover::before,
+  .nav-link.active::before {
     content: "";
     position: absolute;
     bottom: 8px;
@@ -32,16 +53,20 @@
     height: 1.7rem;
   }
 
-  .nav-link:nth-child(1):hover::before {
+  .nav-link:nth-child(1):hover::before,
+  .nav-link:nth-child(1).active::before {
     background-color: var(--accent-color-about);
   }
-  .nav-link:nth-child(2):hover::before {
+  .nav-link:nth-child(2):hover::before,
+  .nav-link:nth-child(2).active::before {
     background-color: var(--accent-color-projects);
   }
-  .nav-link:nth-child(3):hover::before {
+  .nav-link:nth-child(3):hover::before,
+  .nav-link:nth-child(3).active::before {
     background-color: var(--accent-color-photograpy);
   }
-  .nav-link:nth-child(4):hover::before {
+  .nav-link:nth-child(4):hover::before,
+  .nav-link:nth-child(4).active::before {
     background-color: var(--accent-color-blog);
   }
 </style>
