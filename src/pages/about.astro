@@ -66,10 +66,17 @@ import Nav from "../components/Nav.astro";
 </Layout>
 
 <style>
+
+
+ 
   .text-grid {
+    padding: 60px 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+       padding: 60px 0;
     gap: 0 48px;
+
+
   }
 
   .text-col {
@@ -90,8 +97,23 @@ import Nav from "../components/Nav.astro";
     }
   }
 
+   @media (max-width: 1200px) {
+    .text-grid  {
+   
+      padding: 40px 0;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    .text-grid  {
+
+         padding: 20px 0;
+
+    }
+  }
+
   	:global(body){	 
-    --background-color: #ffdcee;
+    --background-color: #f3fff0;
     --accent-color: var(--accent-color-blog);
 	}
 </style>
