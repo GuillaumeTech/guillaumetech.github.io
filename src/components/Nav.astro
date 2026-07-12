@@ -1,39 +1,47 @@
 <nav class="nav" aria-label="Main navigation">
-	<a href="/about" class="nav-link">About</a>
-	<a href="/projects" class="nav-link">Projects</a>
-	<a href="/photography" class="nav-link">Photography &amp; other mediums</a>
-	<a href="/blog" class="nav-link">Blog</a>
-	<!-- TODO: <a href="/resume" class="nav-link">Resume</a> -->
+  <a href="/about" class="nav-link">About</a>
+  <a href="/projects" class="nav-link">Projects</a>
+  <a href="/photography" class="nav-link">Photography &amp; other mediums</a>
+  <a href="/blog" class="nav-link">Blog</a>
+  <!-- TODO: <a href="/resume" class="nav-link">Resume</a> -->
 </nav>
 
 <style>
-	.nav {
-		display: flex;
-		flex-direction: column;
-		gap: 4px;
-		padding-top: 8px;
+  .nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 8px;
     grid-area: nav;
+  }
 
-	}
+  .nav-link {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--primary-text-color);
+    padding: 10px 0;
+    position: relative;
+  }
 
-	.nav-link {
-		font-size: 1.1rem;
-		font-weight: 400;
-		color: #1a1a1a;
-		padding: 10px 0;
-		position: relative;
+  .nav-link:hover::before {
+    content: "";
+    position: absolute;
+    bottom: 8px;
+    left: -20px;
+    width: 12px;
+    height: 1.7rem;
+  }
 
-	}
-
-	.nav-link:hover::before {
-		content: '';
-		position: absolute;
-		bottom: 8px;
-		left: -20px;
-		width: 12px;
-		height: 1.7rem;
-		background: #e8a020;
-	}
-
-
+  .nav-link:nth-child(1):hover::before {
+    background-color: rgb(255, 7, 193);
+  }
+  .nav-link:nth-child(2):hover::before {
+    background-color: rgb(255, 7, 193);
+  }
+  .nav-link:nth-child(3):hover::before {
+    background-color: rgb(255, 7, 193);
+  }
+  .nav-link:nth-child(4):hover::before {
+    background-color: rgb(255, 7, 193);
+  }
 </style>

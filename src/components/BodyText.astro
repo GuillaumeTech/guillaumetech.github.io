@@ -14,7 +14,8 @@ const { lineClamp = 0 } = Astro.props;
   .text  {
     font-size: 0.9rem;
     line-height: 1.75;
-    color: #2a2a2a;
+        color: var(--secondary-text-color);
+
     display: -webkit-box;
     -webkit-line-clamp: var(--lineClamp);
     -webkit-box-orient: vertical;

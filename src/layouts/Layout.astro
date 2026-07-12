@@ -31,11 +31,18 @@
     padding: 0;
   }
 
+  body {
+    --primary-text-color: #722a2a;
+    --secondary-text-color: #ff4545;
+    --background-color: rgb(255, 255, 255);
+    --accent-color: #e8a020;
+  }
+
   html,
   body {
     width: 100%;
     min-height: 100%;
-    color: #1a1a1a;
+    color: var(--primary-text-color);
     font-family: "Inter", sans-serif;
   }
 
@@ -53,7 +60,7 @@
     }
   }
 
-   @media (max-width: 600px) {
+  @media (max-width: 600px) {
     .layout-container {
       padding: 0 30px;
     }
