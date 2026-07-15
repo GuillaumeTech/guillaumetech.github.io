@@ -6,8 +6,12 @@ import Logo from "../components/Logo.astro";
 import Nav from "../components/Nav.astro";
 import type { ImageMetadata } from "astro";
 import Image from "astro/components/Image.astro";
-const images = Object.values(import.meta.glob<{ default: ImageMetadata }>("../assets/*.jpg", { eager: true }));
-const randomImage = images[Math.floor(Math.random() * images.length)].default;
+const images = Object.values(
+  import.meta.glob<{ default: ImageMetadata }>("../assets/*.jpg", {
+    eager: true,
+  }),
+).map((module) => module.default);
+const fallbackImage = images[Math.floor(Math.random() * images.length)];
 ---
 
 <Layout>
@@ -19,12 +23,12 @@ const randomImage = images[Math.floor(Math.random() * images.length)].default;
 
   <main class="page-content">
     <section class="text-grid" aria-label="Introduction">
-		<div class="text-col">
+      <div class="text-col">
         <h2>
           I'm a software engineer living in Montreal. Interested in photography,
           design, and anything relating to visual arts.
         </h2>
-		<hr/>
+        <hr />
         <div class="contact">
           <h2>Contact</h2>
           <ul>
@@ -34,7 +38,6 @@ const randomImage = images[Math.floor(Math.random() * images.length)].default;
         </div>
       </div>
       <div class="text-col">
-		
         <h2>Latest</h2>
         <h4>Test</h4>
         <p>
@@ -49,18 +52,29 @@ const randomImage = images[Math.floor(Math.random() * images.length)].default;
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam.
         </p>
-
-       
       </div>
-		 <div class="text-col random">
-			<h4>A random image from my gallery</h4>
-			<Image src={randomImage} alt="Random photography from my gallery" />
-		 </div>
-     
-      
+      <div class="text-col random">
+        <h4>A random image from my gallery</h4>
+        <Image
+          id="random-homepage-image"
+          src={fallbackImage}
+          alt="Random photography from my gallery"
+        />
+      </div>
     </section>
   </main>
 </Layout>
+
+<script define:vars={{ images }}>
+  const imgElement = document.getElementById("random-homepage-image");
+  if (imgElement && images.length > 0) {
+    const randomIndex = Math.floor(Math.random() * images.length);
+    const selectedImage = images[randomIndex];
+    imgElement.src = selectedImage.src;
+    imgElement.width = selectedImage.width;
+    imgElement.height = selectedImage.height;
+  }
+</script>
 
 <style>
   .text-grid {
@@ -75,33 +89,31 @@ const randomImage = images[Math.floor(Math.random() * images.length)].default;
     display: flex;
     flex-direction: column;
     gap: 20px;
-	hr {
-		margin: 2rem 0;
-	}
-	img {
-		width: 100%;
-		height: auto;
-		object-fit: cover;
-		display: block;
-	}
-   
+    hr {
+      margin: 2rem 0;
+    }
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+    }
+
     .contact {
       text-align: right;
       ul {
         padding-top: 1rem;
         font-size: large;
         list-style: none;
-		a {
-			color:var(--text-primary-color);
-			font-size: 1.3rem;
-		}
-		
+        a {
+          color: var(--text-primary-color);
+          font-size: 1.3rem;
+        }
       }
     }
-	&.random{
+    &.random {
       text-align: right;
-
-	}
+    }
   }
 
   @media (max-width: 900px) {
