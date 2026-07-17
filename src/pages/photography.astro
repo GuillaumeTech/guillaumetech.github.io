@@ -12,6 +12,7 @@ import BodyText from "../components/BodyText.astro";
 import Greetings from "../components/Greetings.astro";
 import Logo from "../components/Logo.astro";
 import Nav from "../components/Nav.astro";
+import ImageCell from "../components/ImageCell.astro";
 ---
 
 <Layout>
@@ -35,98 +36,125 @@ import Nav from "../components/Nav.astro";
           culpa qui officia deserunt mollit anim id est laborum
         </BodyText>
       </Cell>
-
-      <Cell>
-        <a
-          style={`--width: ${car.width}; --height: ${car.height};`}
-          href={car.src}
-          target="_blank"
-          data-fancybox
-          class="post-cell"
-        >
-          <Image src={car} alt="A description of my image." loading={"eager"} />
-        </a>
-      </Cell>
-      <Cell>
-        <a
-          style={`--width: ${tree.width}; --height: ${tree.height};`}
-          href={tree.src}
-          target="_blank"
-          data-fancybox
-          class="post-cell"
-        >
-          <Image
-            src={tree}
-            alt="A description of my image."
-            loading={"eager"}
-          />
-        </a>
-      </Cell>
-      <Cell>
-        <a
-          style={`--width: ${building.width}; --height: ${building.height};`}
-          href={building.src}
-          target="_blank"
-          data-fancybox
-          class="post-cell"
-        >
-          <Image
-            src={building}
-            alt="A description of my image."
-            loading={"eager"}
-          />
-        </a>
-      </Cell>
-
-      <div class="post-cell">
-        <Image src={car} alt="A description of my image." />
-      </div>
-
-      <Cell height={2} width={2}>
-        <a
-          style={`--width: ${car.width}; --height: ${car.height};`}
-          href={car.src}
-          target="_blank"
-          data-fancybox
-          class="post-cell"
-        >
-          <Image src={car} alt="A description of my image." loading={"eager"} />
-        </a>
-      </Cell>
-      <div class="post-cell span-w-2 span-h-2">
-        <Image src={car} alt="A description of my image." />
-      </div><div class="post-cell">
-        <Image src={car} alt="A description of my image." />
-      </div><div class="post-cell">
-        <Image src={car} alt="A description of my image." />
-      </div>
-      <Cell height={2}>
-        <h4>Lorem Ipsum</h4>
-
-        <BodyText>
-          Losrem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum. Excepteur sint
-          occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-          mollit anim id est laborum. Excepteur sint occaecat cupidatat non
-          proident, sunt in Excepteur sint occaecat cupidatat non proident, sunt
-          in culpa qui officia deserunt mollit anim id est laborum
-        </BodyText>
-      </Cell>
-
-      <div class="post-cell">
-        <Image src={car} alt="A description of my image." />
-      </div>
-      <div class="post-cell">
-        <Image src={car} alt="A description of my image." />
-      </div>
-      <div class="post-cell">
-        <Image src={car} alt="A description of my image." />
-      </div>
+      <ImageCell
+        imageName="industrie"
+        alt="a car near a port with a boat in the background"
+        loading="eager"
+      />
+      <ImageCell
+        imageName="course"
+        alt="a car near a port with a boat in the background"
+        loading="eager"
+        spanV={2}
+        spanH={2}
+      />
+      <ImageCell
+        imageName="stlau"
+        alt="a car near a port with a boat in the background"
+        loading="eager"
+      />
+      <ImageCell
+        imageName="verdun"
+        alt="a car near a port with a boat in the background"
+        loading="eager"
+      />
+      <ImageCell
+        imageName="sapin"
+        alt="a car near a port with a boat in the background"
+        loading="eager"
+        spanV={2}
+      />
+      <ImageCell
+        imageName="car"
+        alt="a car near a port with a boat in the background"
+        loading="lazy"
+      />
+      <ImageCell
+        imageName="nyc3"
+        alt="a car near a port with a boat in the background"
+        loading="lazy"
+      />
+      <ImageCell
+        imageName="cirque"
+        alt="a car near a port with a boat in the background"
+        loading="lazy"
+      />
+      <ImageCell
+        imageName="pont"
+        alt="a car near a port with a boat in the background"
+        loading="lazy"
+        spanV={2}
+      />
+      <ImageCell
+        imageName="yatch"
+        alt="a car near a port with a boat in the background"
+        loading="lazy"
+        spanV={2}
+      />
+      <ImageCell
+        imageName="ottawa"
+        alt="a car near a port with a boat in the background"
+        loading="lazy"
+      />
+      <ImageCell
+        imageName="creuse"
+        alt="a car near a port with a boat in the background"
+        loading="lazy"
+        spanH={2}
+        spanV={2}
+      />
+      <ImageCell
+        imageName="ville-marie"
+        alt="a car near a port with a boat in the background"
+        loading="lazy"
+        spanV={2}
+      />
+      <ImageCell
+        imageName="plage"
+        alt="a car near a port with a boat in the background"
+        loading="lazy"
+      />
+      <ImageCell
+        imageName="oregon"
+        alt="a car near a port with a boat in the background"
+        loading="lazy"
+      />
+      <ImageCell
+        imageName="avion"
+        alt="a car near a port with a boat in the background"
+        loading="lazy"
+        spanH={2}
+        spanV={2}
+      />
+      <ImageCell
+        imageName="building"
+        alt="a car near a port with a boat in the background"
+        loading="lazy"
+      />
+      <ImageCell
+        imageName="nyc1"
+        alt="a car near a port with a boat in the background"
+        loading="lazy"
+        spanV={2}
+      />
+      <ImageCell
+        imageName="nyc2"
+        alt="a car near a port with a boat in the background"
+        loading="lazy"
+        spanV={2}
+      />
+      <ImageCell
+        imageName="tremblant"
+        alt="a car near a port with a boat in the background"
+        loading="lazy"
+        spanV={2}
+      />
+      <ImageCell
+        imageName="barn"
+        alt="a car near a port with a boat in the background"
+        loading="lazy"
+        spanV={2}
+      />
     </Grid>
   </main>
 </Layout>
@@ -155,32 +183,23 @@ import Nav from "../components/Nav.astro";
 </script>
 
 <style>
-  a img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
   /* astro-lqip: keep the blurry overlay ON TOP of the img while it streams in.
 	   The img has z-index:1; the ::after starts at --z-index (0 by default).
 	   Setting it to 2 means the placeholder covers the partially-decoded image.
 	   Once onload fires, astro-lqip resets --z-index to 1 and --opacity to 0. */
   :global([data-astro-lqip]) {
     --z-index: 2;
-	width: 100%;
+    width: 100%;
     height: 100%;
   }
 
-   :global([data-astro-lqip]::after) {
+  :global([data-astro-lqip]::after) {
     filter: blur(10px);
     transform: scale(1.2);
   }
 
-  	:global(body){	 
-    --background-color: #FFFBD2;
+  :global(body) {
+    --background-color: #fffbd2;
     --accent-color: var(--accent-color-photography);
-	}
-
-
+  }
 </style>
