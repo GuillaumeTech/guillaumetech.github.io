@@ -7,58 +7,66 @@ import Nav from "../components/Nav.astro";
 ---
 
 <Layout>
-
-  <Header  >
-	<Logo/>
-	<Nav/>
-	<Greetings greeting="Who am i" />
+  <Header>
+    <Logo />
+    <Nav />
+    <Greetings greeting="Who am i" />
   </Header>
 
   <main class="page-content">
     <section class="text-grid" aria-label="Introduction">
       <div class="text-col">
+        <h3>Computer and coding</h3>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum
+          My computer journey started when I was 11 with MS Paint. At the time,
+          I was hooked on pokemon and learned how to make fake sprites by
+          stitching and recoloring those of pokemon (if you're curious, it
+          looked like <a href="">this</a>).
+        </p>
+
+        <p>
+          Armed with the dubious ability to glue sprites together and the
+          confidence only a 11 year old can have, I figured I could make a
+          pokemon-like game. Worst case, if I missed some art, I could stitch
+          some sprites together! Right?! So I downloaded the demo of RPG Maker
+          VX, and made a pretty bad game. But when the hero had a axe in it's
+          inventory he could cut a tree!
         </p>
       </div>
       <div class="text-col">
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam.
+          It was eye opening. I discovered the basics of programming, learned
+          GIMP to improve my sprite surgery game, and soon, I was making
+          websites for my presentations at school. I also somehow ended up
+          trying to learn blender, the interface was challenging back then
+          (2.4-ish if that rings a bell), but it stuck eventually.
         </p>
         <p>
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est
-          laborum
+          I've been experimenting ever since. Whether it's programming, design,
+          3D graphics, or photography, I love figuring out how things work.
+        </p>
+
+        <h3>Bicyles</h3>
+
+        <p>
+          Another big interest in my life is bicycles. I enjoy fixing my bikes (
+          obviously, I have a few) and those of my friends. I've built multiple
+          bikes myself over the years. I find then to be such an elegant piece
+          of machinery. I usually do a bit of bikepacking with my wife in the
+          summer.
         </p>
       </div>
       <div class="text-col">
+        <h3>Photography</h3>
+
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-          enim ad minim veniam.
-        </p>
-        <p>
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-          cupidatat non
-        </p>
-        <p>
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-          cupidatat non
-        </p>
-        <p>
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-          cupidatat non
+          I discovered photography thanks to my mom. I was constantly borrowing
+          her camera until I finally got my own with my first paycheck. Over the
+          years, I've experimented with different styles, but I've always been
+          drawn to photographing shapes and textures. Lately, I've especially
+          enjoyed working in black and white, where form and texture shine. More
+          recently, I joined a cooperative to learn fine art printing. I now
+          volunteer there, helping others to get started with the printer.
         </p>
       </div>
     </section>
@@ -66,17 +74,12 @@ import Nav from "../components/Nav.astro";
 </Layout>
 
 <style>
-
-
- 
   .text-grid {
     padding: 60px 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-       padding: 60px 0;
+    padding: 60px 0;
     gap: 0 48px;
-
-
   }
 
   .text-col {
@@ -84,9 +87,9 @@ import Nav from "../components/Nav.astro";
     flex-direction: column;
     gap: 20px;
     p {
-      font-size: 0.9rem;
-      line-height: 1.75;
-      color: var(--primary-text-color)
+      font-size: 16px;
+      line-height: 130%;
+      color: var(--primary-text-color);
     }
   }
 
@@ -97,23 +100,20 @@ import Nav from "../components/Nav.astro";
     }
   }
 
-   @media (max-width: 1200px) {
-    .text-grid  {
-   
+  @media (max-width: 1200px) {
+    .text-grid {
       padding: 40px 0;
     }
   }
 
   @media (max-width: 1000px) {
-    .text-grid  {
-
-         padding: 20px 0;
-
+    .text-grid {
+      padding: 20px 0;
     }
   }
 
-  	:global(body){	 
+  :global(body) {
     --background-color: #f3fff0;
     --accent-color: var(--accent-color-about);
-	}
+  }
 </style>
