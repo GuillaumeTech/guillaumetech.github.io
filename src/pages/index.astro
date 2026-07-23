@@ -7,7 +7,7 @@ import Nav from "../components/Nav.astro";
 import type { ImageMetadata } from "astro";
 import Image from "astro/components/Image.astro";
 const images = Object.values(
-  import.meta.glob<{ default: ImageMetadata }>("../assets/*.jpg", {
+  import.meta.glob<{ default: ImageMetadata }>(["../assets/*.jpg", '!**/firsthing.jpg'], {
     eager: true,
   }),
 ).map((module) => module.default);
@@ -106,13 +106,15 @@ const fallbackImage = images[Math.floor(Math.random() * images.length)];
         font-size: large;
         list-style: none;
         a {
-          color: var(--text-primary-color);
           font-size: 1.3rem;
         }
       }
     }
     &.random {
       text-align: right;
+    }
+    p {
+      line-height: 130%;
     }
   }
 
