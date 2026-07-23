@@ -12,13 +12,14 @@ const { lineClamp = 0 } = Astro.props;
 <style define:vars={{ lineClamp }}>
 
   .text  {
-    font-size: 0.9rem;
-    line-height: 1.75;
         color: var(--secondary-text-color);
 
     display: -webkit-box;
     -webkit-line-clamp: var(--lineClamp);
     -webkit-box-orient: vertical;
     overflow: hidden;
+     font-size: 16px;
+      line-height: 130%;
+      color: var(--primary-text-color);
   }
 </style>

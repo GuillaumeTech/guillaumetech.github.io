@@ -34,17 +34,16 @@
   body {
     --primary-text-color: #1a1a1a;
     --secondary-text-color: #2e2e2e;
-    --background-color:  #f3fcff;
+    --background-color: #f3fcff;
     --accent-color: #e8a020;
 
     --accent-color-about: #5c9cfd;
     --accent-color-blog: #ffe100;
-    --accent-color-photography: #FF8090;
+    --accent-color-photography: #ff8090;
     --accent-color-projects: #74da58;
     --accent-color-home: #e8a020;
 
-	--background-color-blog: rgb(234, 231, 225);
-
+    --background-color-blog: rgb(234, 231, 225);
   }
 
   html,
@@ -52,8 +51,14 @@
     width: 100%;
     min-height: 100%;
     color: var(--primary-text-color);
-	background-color: var(--background-color); ;
+    background-color: var(--background-color);
     font-family: "Inter", sans-serif;
+  }
+
+  a {
+    color: var(--primary-text-color);
+    text-decoration-color: var(--accent-color);
+    text-decoration-thickness: 2px;
   }
 
   .layout-container {
