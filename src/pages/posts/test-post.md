@@ -2,6 +2,8 @@
 title: 'The greatest post of all time'
 intro: 'Lorem ipsum dolor sit ament consectetur consectetur'
 layout: ../../layouts/BlogPostLayout.astro
+pubDate: 2026-07-18
+editDate:
 ---
 
 ## Lorem
