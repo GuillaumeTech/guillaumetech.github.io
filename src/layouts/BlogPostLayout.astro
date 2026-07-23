@@ -1,21 +1,29 @@
 ---
 const { frontmatter } = Astro.props;
-import SmallHeader from '../components/SmallHeader.astro';
-import Layout from './Layout.astro';
+import SmallHeader from "../components/SmallHeader.astro";
+import Layout from "./Layout.astro";
 
+const pubDate = new Date(frontmatter.pubDate);
+
+const dateString = pubDate.toLocaleDateString("en-US", {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
 ---
 
 <Layout>
-      <SmallHeader />
-      <article>
-        <h1>{frontmatter.title}</h1>
-        <p>{frontmatter.intro}</p>
-        <div class="content">
-          <slot />
-        </div>
-      </article>
-    </Layout>
-
+  <SmallHeader />
+  <article>
+    <h1>{frontmatter.title}</h1>
+    <p>{frontmatter.intro}</p>
+    <p>{dateString}</p>
+    <div class="content">
+      <slot />
+    </div>
+  </article>
+</Layout>
 
 <!-- global style so the style reach within the slots
  not ideal but also this is only used with blogpost as implied by the name
@@ -36,15 +44,13 @@ import Layout from './Layout.astro';
     margin-bottom: 30px;
   }
 
-
   .content {
-		width: 70%;
+    width: 70%;
     max-width: 800px;
   }
   @media (max-width: 900px) {
     .content {
-
-    	width: 100%;
+      width: 100%;
     }
   }
 </style>
