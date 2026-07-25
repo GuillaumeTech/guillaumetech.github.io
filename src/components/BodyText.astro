@@ -3,23 +3,24 @@ interface Props {
   lineClamp?: number;
 }
 const { lineClamp = 0 } = Astro.props;
+
+const textClass = lineClamp === 0 ? "" : "clamp";
 ---
 
-<p class="text">
+<p class={textClass}>
   <slot />
 </p>
 
 <style define:vars={{ lineClamp }}>
-
-  .text  {
-        color: var(--secondary-text-color);
-
+  p {
+    color: var(--secondary-text-color);
+    font-size: 16px;
+    line-height: 140%;
+  }
+  .clamp {
     display: -webkit-box;
     -webkit-line-clamp: var(--lineClamp);
     -webkit-box-orient: vertical;
     overflow: hidden;
-     font-size: 16px;
-      line-height: 130%;
-      color: var(--primary-text-color);
   }
 </style>
