@@ -11,15 +11,13 @@ const { width = 1, height = 1 } = Astro.props;
 </div>
 
 <style define:vars={{ width, height }}>
-    
   .cell {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 15px;
     overflow: hidden;
     grid-column: span var(--width);
     grid-row: span var(--height);
+    align-items: flex-start
   }
-
-
 </style>
