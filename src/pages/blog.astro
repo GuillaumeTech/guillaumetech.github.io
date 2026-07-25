@@ -12,27 +12,28 @@ interface BlogPost {
   url: string;
   frontmatter: { title: string; intro: string };
 }
-const posts: BlogPost[] = Object.values(import.meta.glob("./posts/*.md", { eager: true }));
-
+const posts: BlogPost[] = Object.values(
+  import.meta.glob("./posts/*.md", { eager: true }),
+);
 ---
 
 <Layout>
-	  <Header  >
-	<Logo/>
-	<Nav/>
-	<Greetings greeting="Thoughts & Ideas" />
+  <Header>
+    <Logo />
+    <Nav />
+    <Greetings greeting="Thoughts & Ideas" />
   </Header>
 
   <main class="page-content">
     <Grid>
       {
         posts.map((post: BlogPost) => (
-          <Cell>
-            <a href={post.url}>
+          <a href={post.url}>
+            <Cell>
               <h4>{post.frontmatter.title}</h4>
               <BodyText>{post.frontmatter.intro}</BodyText>
-            </a>
-          </Cell>
+            </Cell>
+          </a>
         ))
       }
     </Grid>
@@ -47,11 +48,8 @@ const posts: BlogPost[] = Object.values(import.meta.glob("./posts/*.md", { eager
     }
   }
 
-
-
-
-	:global(body){	 
+  :global(body) {
     --background-color: var(--background-color-blog);
     --accent-color: var(--accent-color-blog);
-	}
+  }
 </style>
