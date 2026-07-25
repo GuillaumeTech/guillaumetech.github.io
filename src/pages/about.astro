@@ -5,6 +5,8 @@ import Greetings from "../components/Greetings.astro";
 import Logo from "../components/Logo.astro";
 import Nav from "../components/Nav.astro";
 import firstthing from "../assets/firstthing.png";
+import BodyText from "../components/BodyText.astro";
+import AnimatedLink from "../components/AnimatedLink.astro";
 ---
 
 <Layout>
@@ -18,50 +20,50 @@ import firstthing from "../assets/firstthing.png";
     <section class="text-grid" aria-label="Introduction">
       <div class="text-col">
         <h3>Computer and coding</h3>
-        <p>
+        <BodyText>
           My computer journey started when I was 11 with MS Paint. At the time,
           I was hooked on pokemon and learned how to make fake sprites by
-          stitching and recoloring those of pokemon (if you're curious, <a
-            href={firstthing.src}>here</a
+          stitching and recoloring those of pokemon (if you're curious, <AnimatedLink
+            href={firstthing.src}>here</AnimatedLink
           > is one I've kept).
-        </p>
+        </BodyText>
 
-        <p>
+        <BodyText>
           Armed with the dubious ability to glue sprites together and the
           confidence only a 11 year old can have, I figured I could make a
           pokemon-like game. Worst case, if I missed some art, I could stitch
           some sprites together! Right?! So I downloaded the demo of RPG Maker
           VX, and made a pretty bad game. But when the hero had a axe in it's
           inventory he could cut a tree!
-        </p>
+        </BodyText>
       </div>
       <div class="text-col">
-        <p>
+        <BodyText>
           It was eye opening. I discovered the basics of programming, learned
           GIMP to improve my sprite surgery game, and soon, I was making
           websites for my presentations at school. I also somehow ended up
           trying to learn blender, the interface was challenging back then
           (2.4-ish if that rings a bell), but it stuck eventually.
-        </p>
-        <p>
+        </BodyText>
+        <BodyText>
           I've been experimenting ever since. Whether it's programming, design,
           3D graphics, or photography, I love figuring out how things work.
-        </p>
+        </BodyText>
 
         <h3>Bicyles</h3>
 
-        <p>
+        <BodyText>
           Another big interest in my life is bicycles. I enjoy fixing my bikes (
           obviously, I have a few) and those of my friends. I've built multiple
           bikes myself over the years. I find then to be such an elegant piece
           of machinery. I usually do a bit of bikepacking with my wife in the
           summer.
-        </p>
+        </BodyText>
       </div>
       <div class="text-col">
         <h3>Photography</h3>
 
-        <p>
+        <BodyText>
           I discovered photography thanks to my mom. I was constantly borrowing
           her camera until I finally got my own with my first paycheck. Over the
           years, I've experimented with different styles, but I've always been
@@ -69,7 +71,7 @@ import firstthing from "../assets/firstthing.png";
           enjoyed working in black and white, where form and texture shine. More
           recently, I joined a cooperative to learn fine art printing. I now
           volunteer there, helping others to get started with the printer.
-        </p>
+        </BodyText>
       </div>
     </section>
   </main>
@@ -88,11 +90,6 @@ import firstthing from "../assets/firstthing.png";
     display: flex;
     flex-direction: column;
     gap: 20px;
-    p {
-      font-size: 16px;
-      line-height: 130%;
-      color: var(--primary-text-color);
-    }
   }
 
   @media (max-width: 900px) {
