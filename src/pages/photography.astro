@@ -9,6 +9,7 @@ import Greetings from "../components/Greetings.astro";
 import Logo from "../components/Logo.astro";
 import Nav from "../components/Nav.astro";
 import ImageCell from "../components/ImageCell.astro";
+import AnimatedLink from "../components/AnimatedLink.astro";
 ---
 
 <Layout>
@@ -20,29 +21,50 @@ import ImageCell from "../components/ImageCell.astro";
 
   <main class="page-content">
     <Grid>
-      <Cell width={2}>
-        <h4>Lorem Ipsum</h4>
+      <Cell width={3}>
+        <h4>Selected works</h4>
         <BodyText>
-          Losrem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum
+          Here is a small selection of my favorite pictures. Mostly, My interest
+          in photography has been shapes and textures, and how they interact.
+          Recently I've embraced black and white, as I find it really lets those
+          elements shine. The better way to get an idea of the kind of
+          photography I do is to simply have a lookaround. The photos will speak
+          for themselves.
+        </BodyText>
+
+        <BodyText>
+          I also sell prints, and I plan to add a shop here eventually. Until
+          then, if you're interested in a print, or if you'd like to use one of
+          these photos, just send me a message on <AnimatedLink
+            href="https://www.instagram.com/guillaume_tech/"
+            >Instagram</AnimatedLink
+          >.
         </BodyText>
       </Cell>
       <ImageCell
-        imageName="industrie"
+        imageName="sapin"
         alt="a car near a port with a boat in the background"
         loading="eager"
+        spanV={2}
       />
+
       <ImageCell
         imageName="course"
         alt="a car near a port with a boat in the background"
         loading="eager"
         spanV={2}
         spanH={2}
+      />
+      <ImageCell
+        imageName="industrie"
+        alt="a car near a port with a boat in the background"
+        loading="eager"
+      />
+      <ImageCell
+        imageName="pont"
+        alt="a car near a port with a boat in the background"
+        loading="lazy"
+        spanV={2}
       />
       <ImageCell
         imageName="stlau"
@@ -54,12 +76,7 @@ import ImageCell from "../components/ImageCell.astro";
         alt="a car near a port with a boat in the background"
         loading="eager"
       />
-      <ImageCell
-        imageName="sapin"
-        alt="a car near a port with a boat in the background"
-        loading="eager"
-        spanV={2}
-      />
+
       <ImageCell
         imageName="car"
         alt="a car near a port with a boat in the background"
@@ -75,12 +92,7 @@ import ImageCell from "../components/ImageCell.astro";
         alt="a car near a port with a boat in the background"
         loading="lazy"
       />
-      <ImageCell
-        imageName="pont"
-        alt="a car near a port with a boat in the background"
-        loading="lazy"
-        spanV={2}
-      />
+
       <ImageCell
         imageName="yatch"
         alt="a car near a port with a boat in the background"
@@ -93,12 +105,11 @@ import ImageCell from "../components/ImageCell.astro";
         loading="lazy"
       />
       <ImageCell
-        imageName="creuse"
+        imageName="plage"
         alt="a car near a port with a boat in the background"
         loading="lazy"
-        spanH={2}
-        spanV={2}
       />
+
       <ImageCell
         imageName="ville-marie"
         alt="a car near a port with a boat in the background"
@@ -106,9 +117,11 @@ import ImageCell from "../components/ImageCell.astro";
         spanV={2}
       />
       <ImageCell
-        imageName="plage"
+        imageName="creuse"
         alt="a car near a port with a boat in the background"
         loading="lazy"
+        spanH={2}
+        spanV={2}
       />
       <ImageCell
         imageName="oregon"
@@ -151,6 +164,16 @@ import ImageCell from "../components/ImageCell.astro";
         loading="lazy"
         spanV={2}
       />
+
+      <Cell height={2}>
+        <h4>Other mediums</h4>
+        <BodyText>
+          While photography is a big part of my creative output, I'm fancinated
+          by creating images. And beside photography, I've experimented with
+          Photoshop, Blender and others. More recently developed more interest
+          in traditional mediums and tried my hand at linocutting.
+        </BodyText>
+      </Cell>
     </Grid>
   </main>
 </Layout>
