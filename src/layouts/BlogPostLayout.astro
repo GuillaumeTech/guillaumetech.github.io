@@ -16,9 +16,11 @@ const dateString = pubDate.toLocaleDateString("en-US", {
 <Layout>
   <SmallHeader />
   <article>
+    <hr>
     <h1>{frontmatter.title}</h1>
     <p>{frontmatter.intro}</p>
     <p>{dateString}</p>
+    <hr>
     <div class="content">
       <slot />
     </div>
@@ -31,26 +33,36 @@ const dateString = pubDate.toLocaleDateString("en-US", {
 -->
 <style is:global>
   h1,
+  h2,
+  h3,
   h4 {
     font-family: "Young Serif", Georgia, serif;
+    margin: 1rem 0rem;
+    margin-top: 2rem;
   }
 
   body {
     background: var(--background-color-blog);
   }
 
-  article p {
-    margin-top: 15px;
-    margin-bottom: 30px;
+   article p {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
   }
 
   .content {
     width: 70%;
-    max-width: 800px;
+    max-width: 900px;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
   }
   @media (max-width: 900px) {
     .content {
       width: 100%;
     }
+  }
+
+  pre {
+    padding: 1rem;
   }
 </style>

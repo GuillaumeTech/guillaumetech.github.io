@@ -6,8 +6,8 @@ import Logo from "./Logo.astro";
   <Logo />
   <div class="separator"></div>
   <div class="subsection">
-  <!-- only used for blog, add props when needed-->
-    <a href="/blog">Blog</a>
+    <!-- only used for blog, add props when needed-->
+    <a class="base-link" href="/blog">Blog</a>
   </div>
 </header>
 
@@ -24,28 +24,24 @@ import Logo from "./Logo.astro";
     position: relative;
     width: 12px;
     height: 1.7rem;
-    background:     var(--accent-color-blog);
-;
+    background: var(--accent-color-blog);
     align-self: center;
   }
 
-  .subsection a {
+  .subsection {
     font-size: 1.2rem;
-    font-weight: 400;
-    color: #1a1a1a;
+    color: var(--primary-text-color);
   }
 
   @media (max-width: 1000px) {
     .site-header {
       padding-top: 60px;
     }
-    
   }
 
   @media (max-width: 600px) {
     .site-header {
       padding: 24px 0;
     }
-   
   }
 </style>

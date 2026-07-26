@@ -6,7 +6,7 @@ interface Props {
 const { href, target = "blank" } = Astro.props;
 ---
 
-<a href={href} target={target}><slot /></a>
+<a class="base-link" href={href} target={target}><slot /></a>
 
 <style>
   a {
