@@ -3,10 +3,12 @@ interface Props {
   href?: string;
   target?: string;
 }
-const { href, target = "blank" } = Astro.props;
+const { href, target = "_blank" } = Astro.props;
 ---
 
-<a class="base-link" href={href} target={target}><slot /></a>
+<a class="base-link" rel="noopener noreferrer" href={href} target={target}
+  ><slot /></a
+>
 
 <style>
   a {
@@ -39,5 +41,12 @@ const { href, target = "blank" } = Astro.props;
 
   a:hover::after {
     transform: translate3d(0, 0, 0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition: none !important;
+      animation: none !important;
+    }
   }
 </style>
