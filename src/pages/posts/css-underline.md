@@ -30,7 +30,7 @@ editDate: 2026-07-26
     left: 0;
     width: 250%;
     height: 2px;
-    background: linear-gradient(to right, lime, lime 50%, black 50%, black);
+    background: linear-gradient(to right, limegreen, limegreen 50%, black 50%, black);
     transition: transform 250ms ease-in-out;
     transform: translate3d(-50%, 0, 0);
   }
@@ -67,7 +67,7 @@ a::after {
   left: 0;
   width: 250%;
   height: 1px;
-  background: linear-gradient(to right, lime, lime 50%, black 50%, black);
+  background: linear-gradient(to right, limegreen, limegreen 50%, black 50%, black);
   transition: transform 250ms ease-in-out;
   transform: translate3d(-50%, 0, 0);
 }

@@ -6,24 +6,25 @@ const links = [
   { href: "/projects", label: "Projects" },
   { href: "/photography", label: "Photography & other mediums" },
   { href: "/blog", label: "Blog" },
-//   TODO: { href: "/resume", label: "Resume" },
+  //   TODO: { href: "/resume", label: "Resume" },
 ];
 ---
 
 <nav class="nav" aria-label="Main navigation">
-  {links.map(({ href, label }) => {
-    const isActive = pathname === href || pathname.startsWith(href + "/");
-    return (
-      <a
-        href={href}
-        class:list={["nav-link", { active: isActive }]}
-        aria-current={isActive ? "page" : undefined}
-      >
-        {label}
-      </a>
-    );
-  })}
-
+  {
+    links.map(({ href, label }) => {
+      const isActive = pathname === href || pathname.startsWith(href + "/");
+      return (
+        <a
+          href={href}
+          class:list={["nav-link", { active: isActive }]}
+          aria-current={isActive ? "page" : undefined}
+        >
+          {label}
+        </a>
+      );
+    })
+  }
 </nav>
 
 <style>
@@ -39,8 +40,7 @@ const links = [
     font-size: 1.1rem;
     font-weight: 400;
     color: var(--primary-text-color);
-		  text-decoration: none;
-
+    text-decoration: none;
     padding: 10px 0;
     position: relative;
   }

@@ -8,7 +8,7 @@ import type { ImageMetadata } from "astro";
 import Image from "astro/components/Image.astro";
 import AnimatedLink from "../components/AnimatedLink.astro";
 const images = Object.values(
-  import.meta.glob<{ default: ImageMetadata }>(["../assets/*.jpg", '!**/firsthing.jpg'], {
+  import.meta.glob<{ default: ImageMetadata }>(["../assets/*.jpg", '!**/firstthing.jpg'], {
     eager: true,
   }),
 ).map((module) => module.default);
