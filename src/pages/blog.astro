@@ -1,19 +1,19 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header.astro";
-import Grid from "../components/Grid.astro";
-import Cell from "../components/Cell.astro";
 import BodyText from "../components/BodyText.astro";
+import Cell from "../components/Cell.astro";
 import Greetings from "../components/Greetings.astro";
+import Grid from "../components/Grid.astro";
+import Header from "../components/Header.astro";
 import Logo from "../components/Logo.astro";
 import Nav from "../components/Nav.astro";
+import Layout from "../layouts/Layout.astro";
 
 interface BlogPost {
-  url: string;
-  frontmatter: { title: string; intro: string };
+	url: string;
+	frontmatter: { title: string; intro: string };
 }
 const posts: BlogPost[] = Object.values(
-  import.meta.glob("./posts/*.md", { eager: true }),
+	import.meta.glob("./posts/*.md", { eager: true }),
 );
 ---
 

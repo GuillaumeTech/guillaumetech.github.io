@@ -5,21 +5,21 @@ import { Image } from "astro-lqip/components";
 import Cell from "../components/Cell.astro";
 
 interface Props {
-  imageName: string;
-  spanH?: number;
-  spanV?: number;
-  alt: string;
-  loading: "eager" | "lazy";
+	imageName: string;
+	spanH?: number;
+	spanV?: number;
+	alt: string;
+	loading: "eager" | "lazy";
 }
 
 const { imageName, spanH = 1, spanV = 1, alt, loading } = Astro.props;
 const imagePath = `/src/assets/${imageName}.jpg`;
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/*.jpg",
+	"/src/assets/*.jpg",
 );
 if (!images[imagePath])
-  throw new Error(`"${imagePath}" does not exist in glob: "src/assets/*.jpg"`);
+	throw new Error(`"${imagePath}" does not exist in glob: "src/assets/*.jpg"`);
 
 const { default: image } = await images[imagePath]();
 ---
