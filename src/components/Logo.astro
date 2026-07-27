@@ -21,14 +21,21 @@ const isHome = Astro.url.pathname === "/";
     position: relative;
   }
 
-  .logo-name:hover::before,
-  .logo-name.active::before {
+   .logo-name::before {
     content: "";
     position: absolute;
+    bottom: 3px;
     left: -20px;
     width: 12px;
-    height: 2rem;
+    height: 0rem;
     background-color: var(--accent-color-home);
+    transition: height 150ms ease-in-out;
+  }
+
+
+  .logo-name:hover::before,
+  .logo-name.active::before {
+    height: 2rem;
   }
 
   @media (max-width: 600px) {

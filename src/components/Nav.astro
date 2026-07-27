@@ -45,30 +45,31 @@ const links = [
     position: relative;
   }
 
-  .nav-link:hover::before,
-  .nav-link.active::before {
+
+  .nav-link:nth-child(1) { --link-accent: var(--accent-color-about); }
+  .nav-link:nth-child(2) { --link-accent: var(--accent-color-projects); }
+  .nav-link:nth-child(3) { --link-accent: var(--accent-color-photography); }
+  .nav-link:nth-child(4) { --link-accent: var(--accent-color-blog); }
+
+  .nav-link::before {
     content: "";
     position: absolute;
     bottom: 8px;
     left: -20px;
     width: 12px;
+    height: 0rem;
+    background-color: var(--link-accent);
+    transition: height 150ms ease-in-out;
+  }
+
+  .nav-link:hover::before,
+  .nav-link.active::before {
     height: 1.7rem;
   }
 
-  .nav-link:nth-child(1):hover::before,
-  .nav-link:nth-child(1).active::before {
-    background-color: var(--accent-color-about);
-  }
-  .nav-link:nth-child(2):hover::before,
-  .nav-link:nth-child(2).active::before {
-    background-color: var(--accent-color-projects);
-  }
-  .nav-link:nth-child(3):hover::before,
-  .nav-link:nth-child(3).active::before {
-    background-color: var(--accent-color-photography);
-  }
-  .nav-link:nth-child(4):hover::before,
-  .nav-link:nth-child(4).active::before {
-    background-color: var(--accent-color-blog);
+  @media (prefers-reduced-motion: reduce) {
+    .nav-link::before {
+      transition: none;
+    }
   }
 </style>
