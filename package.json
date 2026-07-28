@@ -10,7 +10,7 @@
 		"build": "astro build",
 		"preview": "astro preview",
 		"astro": "astro",
-		"format": "biome check --write ."
+		"format": "biome check --write . && biome format --write ."
 	},
 	"dependencies": {
 		"@fancyapps/ui": "^6.1.14",
