@@ -1,0 +1,129 @@
+---
+import AnimatedLink from "../components/AnimatedLink.astro";
+import BodyText from "../components/BodyText.astro";
+import Greetings from "../components/Greetings.astro";
+import Header from "../components/Header.astro";
+import Logo from "../components/Logo.astro";
+import Nav from "../components/Nav.astro";
+import Separator from "../components/Separator.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <Header>
+    <Logo />
+    <Nav />
+    <Greetings greeting="Work" />
+  </Header>
+
+  <main class="page-content">
+<p>Alternatively you can download a more classical pdf resume <AnimatedLink>here</AnimatedLink>.</p>
+<section>
+    <h3>Radio-canada</h3>
+            
+ <h4>Public Space Incubator:
+
+
+
+ </h4>
+ <BodyText> A startup-like team where we developed conversational spaces that promote engagement and healthy dialogue.In collaboration with <AnimatedLink href="https://newpublic.org/" >New_Public</AnimatedLink> and other public broadcaster.
+  I was in charge of multiple core features (admin view, special layouts, and more), migrations, 
+  and helped guide the work on accessibility. We nearly doubled the number of interactions (comments, reactions) 
+  on our platform compared to the industry average.
+
+    </BodyText>
+     <h4>Digital production studio:</h4>
+    <BodyText>
+        My team was responsible for a portfolio of about 10 projects. 
+        I grew to be the reference person for 3 of them, including <AnimatedLink href="https://ici.radio-canada.ca">Radio-Canada</AnimatedLink>'s homepage. 
+        My work includes 3 major migrations of technological stacks, resulting in improved stability and easier onboarding. 
+        I improved the internal library by simplifying its routing layer, reducing its size by 20%. 
+        Most of my work has been on components and pages that reached millions of people.
+    </BodyText>
+   <Separator text="2023"/>
+   
+</section>
+<section>
+
+    <h3>Dialogue</h3>
+<h4>Care provider experience</h4>
+    <BodyText>
+
+ I automated repetitive tasks for doctors and nurses, eliminating redundant steps. 
+As a result, 15% of finished consultations were automatically processed. Seamlessly migrated care plans between two APIs, 
+centralizing them in a single web app, which greatly improved the user experience.
+    </BodyText>
+
+<h4>Botfront at Dialogue</h4> 
+       <BodyText>
+Dialogue, a telemedicine company, acquired Botfront in 2021. 
+We successfully integrated Botfront into Dialogue’s tech stack, improving how chatbots are 
+visualized and empowering medical staff to edit them directly. The import-export system I had built became a cornerstone of this work.
+       </BodyText>
+   <Separator text="2021"/>
+   
+          </section>
+<section>
+
+   <h3>Botfront</h3>
+   <h4>Botfront</h4>
+    <BodyText>
+
+    6-person startup where we built a SaaS tool to create chatbots. I architected and built core features of the application (frontend, backend, infrastructure). I built an import-export system with error detection, which allowed us to integrate with Git and to version the chatbots. I created an analytics system providing actionable insights to our clients (BNC, Accor, Orange, and 40 others). I added on-screen guidance capabilities driven by the conversation, which allowed replacing messages with live highlighting. Acquired by Dialogue.
+    </BodyText>
+
+   <Separator text="2019"/>
+
+  </section>
+<section>
+
+
+   <h3> ESEO</h3>
+   <h4>Master of Software Engineering :</h4>
+     <BodyText>
+ 2 years of Mathematics, Physics and Electronics (Classe préparatoire) and then 3 years of software engineering. Last year project: Metro network simulator, simulating millions of trips.
+
+    </BodyText>
+  </section>
+
+  </main>
+</Layout>
+<style>
+
+  h4 {
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+  }
+  main {
+    padding-bottom: 5rem;
+  }
+
+  p {
+    font-style: italic;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+  }
+ section {
+    width: 70%;
+    max-width: 900px;
+
+  }
+
+  @media (max-width: 900px) {
+    section {
+      width: 100%;
+    }
+  }
+
+   @media (max-width: 900px) {
+    p {
+       margin-top: 1rem;
+    }
+  }
+  :global(body) {
+    --primary-text-color: #141416;
+    --secondary-text-color: #2e2d39;
+    --background-color: #e4fefc;
+    --accent-color: var(--accent-color-resume);
+  }
+</style>
