@@ -1,5 +1,5 @@
 ---
-title: "How chrome optimize jpg rendering"
+title: "Weird JPEG artifacts and How chrome optimize JPEG rendering"
 intro: ""
 layout: ../../layouts/BlogPostLayout.astro
 pubDate: 2026-08-01
@@ -16,34 +16,54 @@ editDate: 2026-07-26
   }
 </style>
 
-## The issue
+## The problem
 
-I stublbled upon this while debugging a weird rendering artifact, we used a big jpg for a tiny icon (ok sure, this is a bad practive in the first place, in the end the fix is simply using a .svg instead) and only on my machine it was looking like this. I was the only one using chrome so that where i started looking.
+Here is what I saw on my mahcine
 
-example
-me
-Original -> scaled down bad
+My computer: scaled down badly
+My colleagues: scaled down fine
+note : Not the orginal logo, This happened a while ago and I made a image to reproduce the issue.
 
-everyone elese
-Original -> scaled down
+This icon had been like that for a while and I was seeminly the only one affected, also it wasn't widely used in the app. Upon inspection the icon was actually a big jpg that was scalled down to 20\*20, weird, but it was an internal logo, so the svg wasn't easy to get to. Since it wasn't seeing a lot of traffic anyway, it had been logged and forgoten in the backlog.
 
-## Quick primer on how jpg store images
+Still, I kept seeing it every so often. When I Chirstmas was closing in and I had a bit of bandwidth I asked around to get the proper svg and remplaced the jpg. The weird aliasing was gone, great! an easy fix.
+
+However I was intrigued, why was it rendering like this in the first place ? I played with the bug a bit and quickly realised it was tied to Chrome. As it was rendering fine on safari.
+
+## Is it CSS ?
+
+I didn't really know where to start to investigate this problem. Searching for "Chrome image aliasing" didn't give any lead beside a css property, `image-rendering`, Could it be the browser css ? that wouldn't really make sense, and it would afect many more images but half convived I tried a few thing like `image-rendering: crisp-edges;` and `image-rendering: pixelated;` to no avail.
+
+I tried with png, no problem at a lower scale, the edges were nice. then I decided to try scaling down the image myself, and then use in our app. this time the edges where rendering nicely ! Progress, nice ! so now I had narrowed it down someway it was only with jpg and letting chrome do the scaling. The subsequent serach didn't give me a lot, I found a few thing where people were complaining that the scaling down of the images was blurry on chrome, but I had the opposite problem, my image was too crisp ! some poeple were discusiong jpg compression artifacts but that wasn't really my issue.As it's often the case, I felt like I was just missing the proper name for my problem. So I decided to read the learn about how jpeg works started with a few videos, and got to the jpeg wikipedia page to hopefully find technical terms that i could use in my search.
+
+## Well, I guess I'm reading wikipedia page on JPEG
+
+I relazied a barely knew how JPEG worked, which is a bit sad, it's unavoidable as soon you get next to a somewhat modern computer, and for example I didn't even knew jpeg stood for Join photography expert group.
+
+The technical details are quite interesting and, there are a few neat tricks. It's a good read and I frankly go disctracted by being impressed by how clever jpeg was. In my wikipedia deep dive I somehow ended up on the libjpeg page, and their websidte jpegclub.org (great name!). There was quite a few things about scaling on the home page, which got me excited. Eventually I subbled on "Partial IDCT Scaling". AH!
+
+## Partial IDCT Scaling and how jpg works.
+
+Yes obviously partial idct scaling! trivial!
 
 To fully understand the rest of this post, you'll need to have a rought how jpg compression works,I find the wikipedia page is excellent. But if you prefer here is a quick primer, that will oversimplfy and skip a few things to allow you to follow the rest of the post.
 
 DCT, 16, low freq = color doesnt change, basically something mono chromatic
 
-Again this is quite an oversimplicifation, there is a color space change happening, the dct coeficient, the ordeging aren't mentioned. 
+Again this is quite an oversimplicifation, there is a color space change happening, the dct coeficient, the ordeging aren't mentioned.
 
 ## How chrome optimize jpg at low scales.
 
-The intuitive idea to render a small image is that chrome has to render the full jpg somewhere in memory and then scale it down. But turns out this is quite inneficient, imagine you have a 2000px per 2000px image that you need to render at 20px per 20px. Once decoded the jpg takes much more space (TO CHECK), roughtly 12MB (it's basically a bitmap then). For in the end scaling it to only 20px 20px (1.2kB as bitmap). with a lot of informatin that is lost. But this information is not lost at random ! We know it's gonna be a high-frequency data. Imagine a picture of a tree, with a lot of foillage, and a bark that really coarse, all of those are details, and details are "high frequency", thus if you scale down this tree to 2x1 you would have a green pixel at the top for the foillage, a brown pixel a the bottom. Do you see where this is going ?
-the jpg compression order it's data from low to hight freq. and it's abslutely possible to only decode part of it. 
+The intuitive idea to render a small image is that chrome has to render the full jpg somewhere in memory and then scale it down. But turns out this is quite inneficient, imagine you have a 2000px per 2000px image that you need to render at 20px per 20px. Once decoded the jpg takes much more space (TO CHECK), roughtly 12MB (it's basically a bitmap then). For in the end scaling it to only 20px 20px (1.2kB as bitmap). with a lot of informatin that is lost. But this information is not lost at random ! We know it's gonna be a high-frequency data. Imagine a picture of a tree, with a lot of foillage, and a bark that really coarse, all of those are details, and details are "high frequency" as in to represent them the value has to change a lot, thus if you scale down this tree to 2x1 you would have a green pixel at the top for the foillage, a brown pixel a the bottom.
 
-It's called a partial IDCT, where during decoding we only care about the a subset of the coeficient. thus rendering a scaled down image directly. if you decode 1 out of 8 you effectively scale down the image by 8 and
+The way jpg work (oversimplifying a lot here) is that each 8x8 block is converted to the frequency domain. The number of Frequency a 8x8 block can represent is limited the lowest frequency being monochrome (no change), the highest is a checker partern(maxium change). these are called the basis function
 
+[image]
 
+So converting a 8x8 block to the frequency domain is basically answering, how much each of those pattern is in the original image.
 
-A nice trick from jpg relying on frequency data is that you can  
+It's called a partial IDCT, where during decoding we only care about the a subset of the coeficient. Thus rendering a scaled down image directly. if you decode 1 out of 8 you effectively scale down the image by 8 and
 
-Link to chrome call to skia  https://github.com/google/skia/blob/30ad01017a46a31859b580bc907457b0e43907a8/src/codec/SkJpegCodec.cpp#L383 jpg-turbo, partial DCT, only using lower freq, scaling according to how many dct are used
+A nice trick from jpg relying on frequency data is that you can
+
+Link to chrome call to skia https://github.com/google/skia/blob/30ad01017a46a31859b580bc907457b0e43907a8/src/codec/SkJpegCodec.cpp#L383 jpg-turbo, partial DCT, only using lower freq, scaling according to how many dct are used
