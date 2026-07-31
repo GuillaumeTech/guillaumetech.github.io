@@ -105,7 +105,7 @@ The problem is that we need `display: inline-block` for `overflow: hidden` to ac
 
 Another way to hide overflow is `clip-path`, which is way more flexible, you can basically write SVG shapes to draw anything you want.
 
-It also provides us with a useful function, `inset()`, which "defines a rectangle at the specified inset distances from each side of the reference box" <sup><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/basic-shape/inset">MDN</a></sup>.
+It also provides us with a useful function, `inset()`, which "defines a rectangle at the specified inset distances from each side of the reference box" <sup><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/basic-shape/inset" target="_blank">MDN</a></sup>.
 
 By using `clip-path: inset(-5px 0);`, we cut off horizontal overflow to the left and right (`0`) while allowing slight vertical room (`-5px`) so the underline thickness doesn't get clipped on top or bottom.
 
