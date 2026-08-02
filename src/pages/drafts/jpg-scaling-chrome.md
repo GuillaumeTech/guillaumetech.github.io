@@ -1,5 +1,5 @@
 ---
-title: "Weird JPEG artifacts and How chrome optimize JPEG rendering"
+title: "Weird JPEG artifacts and how Chrome optimize JPEG rendering"
 intro: ""
 layout: ../../layouts/BlogPostLayout.astro
 pubDate: 2026-08-01
@@ -14,6 +14,11 @@ editDate: 2026-07-26
     border-radius: 6px;
     background: rgba(0, 0, 0, 0.02);
   }
+
+  img {
+    width: 100%;
+  height: auto;
+  }
 </style>
 
 ## The problem
@@ -27,47 +32,45 @@ Note: this was not the original logo. This happened a while ago, so I made a sep
 
 Swapping the image for an SVG fixed it. But I was curious: why was it rendering like this in the first place?
 
-I did some digging and found out that Chrome optimizes JPEG rendering at small scales.
+I did some digging and found a nifty optimization that Chrome does when rendering JPEG at small scales.
 
 ## Scaling down images can be wastefull
 
 The intuitive way to render a small image from a JPEG is to fully decompress it in memory and then scale it down.
 
-But that is not very efficient.
+But that is not always efficient.
 
 Imagine a 2000 × 2000 JPEG that needs to be displayed at 20 × 20. Once uncompressed, the image takes far more space in memory than the final result. A bitmap of the full image uses roughly 12 MB, while the final 20 × 20 image only needs about 1.2 KB. Most of the information in the large version is lost when scaling down.
 
-### What information is lost when scaling down?
+## What information is lost when scaling down?
 
 An interesting insight is that the information lost is not random.
 
 When an image is scaled down heavily, the information that disappears is mostly the high-frequency detail. This is easy to see intuitively. Think of a tree with lots of leaves and rough bark: those fine details change quickly from pixel to pixel, so they count as high-frequency information.
 
-If you scale that tree down to something tiny, like 20 × 10, you might end up with just a green blob at the top for the foliage and a brown stick at the bottom for the trunk. The scaled-down version has thrown away the fine detail, the high-frequency information.
+If you scale that tree down to something tiny, like 20 × 10, you end up with just a green blob at the top for the foliage and a brown stick at the bottom for the trunk. The scaled-down version has thrown away the fine detail, the high-frequency information.
 
-[images example]
+![illustration of a tree being scaled down](../../assets/blog/tree-example.jpg)
+<i>Illustration of a tree being scaled down</i>
 
-Some of that high-frequency information still survives a little, because the details get mixed together, so the edges are not perfectly sharp.
+Some of that high-frequency information still survives a little, because the details get mixed together,
 
-### How JPEG stores image data
+## How JPEG stores image data
 
 I will keep this explanation light on jargon and maths, but I will still mention a few technical terms that can be good starting points if you want to dig deeper. I will also skip a fair chunk of the full JPEG transformation, because it is not needed here.
 
-During JPEG compression, images are split into 8 × 8 blocks that are converted into the frequency domain. This operation is called a **DCT**.
+During JPEG compression, images are split into 8 × 8 blocks that are converted into the frequency domain. This operation is called a **DCT** (Discrete cosine transform).
 
 In an 8 × 8 block, the lowest possible frequency is a flat color. Strictly speaking, it is not really a frequency because nothing changes, it is the **constant component**. On the opposite side, the highest frequency looks like a checkerboard, where the value changes as much as possible. Everything in between represents the rest of the frequency domain. These are called **basis functions**.
 
-\*discrete cosine transform
-
-[image]
-
-The basis functions: you can see the flat color in the top-left, and the checkerboard in the bottom-right.
+![Basis functions](../../assets/blog/basisfunctions.png)
+<i>The basis functions: you can see the flat color in the top-left, and the checkerboard in the bottom-right.</i>
 
 So converting an 8 × 8 block into the frequency domain is basically asking: how much of each pattern is present in this block? Those amounts are called **coefficients**.
 
 JPEG compression has a few more steps after that to store those coefficients efficiently, and that is where the lossy compression happens. But that part is not important for what we are discussing here.
 
-### Putting it together: rendering a JPEG at 1/8 scale
+## Putting it together: rendering a JPEG at 1/8 scale
 
 Now let’s say you want to shrink an image by a factor of 8.
 
@@ -77,9 +80,9 @@ So instead of decompressing the whole JPEG, we can skip the coefficients for the
 
 The decoded image takes less space and is faster to uncompress, since we are skipping a good chunk of the coefficients.
 
-This can be extended to other ratios, as long as they are fractions of 8. The technical name for this is **partial IDCT scaling**. See [jpegclub.org](https://jpegclub.org/djpeg/) (if you read a bit on this you will see that this technique can also be used to upscale images!)
+This can be extended to other ratios, as long as they are fractions of 8. The technical name for this is **partial IDCT scaling\***. See [jpegclub.org](https://jpegclub.org/djpeg/) (if you read a bit on this you will see that this technique can also be used to upscale images!)
 
-\*inverse discrete cosine transform: taking the frequency domain back to the image domain.
+\* Inverse discrete cosine transform: taking the frequency domain back to the image domain.
 
 ## How Chrome fits in
 
@@ -89,4 +92,4 @@ In other words, Chrome/Skia does not always decompress the full image and scale 
 
 That is why the image had rough edges on my machine. Because it was rendered so small, It was decoded at 1/8 using partial IDCT scaling. So the only data from the frequency representation was the constant component, all nice curves/gradient weren't used.
 
-Really, the moral here is that you shouldn't use JPEG for icons and the likes, the optimization are designed for our perceptions of photos. After all, its in the name Join **Photographic** Expert Group.
+Really, the moral here, is that you shouldn't use JPEG for icons and the likes, the format and its optimization are designed for our perceptions of photos. After all, its in the name Join **Photographic** Expert Group.
