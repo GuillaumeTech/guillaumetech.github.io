@@ -39,7 +39,7 @@ Imagine a 2000 × 2000 image that needs to be displayed at 20 × 20. Once uncomp
 
 ### What information is lost when scaling down?
 
-That information is not lost at random.
+An interesting insight is that the information lost is not random!
 
 When an image is scaled down heavily, the information that disaper is the the high-frequency one. And it's easy to understand this intuitively actually. Think of an image of a tree with lots of leaves and rough bark: those fine details change quickly from pixel to pixel, so they count as high-frequency information.
 
@@ -51,11 +51,11 @@ This high frequency information. stil somewhat survied as they are "mixed" toget
 
 ### How JPEG stores image data
 
-I will keep this explanation light on jargon/maths, but still provide a few technical term that can be a good starting ponint if you want to dig deeper. Still, I'll simplify a lot and will skip a good chunck of the whole jpeg transformation.
+I'll keep this explanation light on jargon/maths, but still provide a few technical term that can be a good starting ponint if you want to dig deeper. Nonetheless, I'll simplify a lot and will skip a good chunck of the whole jpeg transformation.
 
 During the compression for JPEG the images are splited into 8 × 8 blocks that are converted to the frequency domain, this operation is called a **DCT**.
 
-In this 8x8 block, the lowest frequency possible is a flat color (well, it's not really a frequency because it doesn't change). The highest frequency looks like a checkerboard, the value is changing as much as possible. And the whole frequency domain would be all the possible image in between. there are called **basis functions**.
+In this 8x8 block, the lowest frequency possible is a flat color, well, it's not really a frequency because it doesn't change, it's the **contant component**. On the oposite side, the highest frequency looks like a checkerboard, the value is changing as much as possible. And the whole frequency domain would be all the possible image in between. there are called the **basis functions**.
 
 *discret cosinus transfrorm
 [image]
