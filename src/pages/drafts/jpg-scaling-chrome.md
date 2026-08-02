@@ -27,7 +27,7 @@ Note: this was not the original logo. This happened a while ago, so I made a sep
 
 Swapping the image for an SVG fixed it. But I was intrigued: why was it rendering like this in the first place?
 
-I did some digging and found out that Chrome optimizes JPEG rendering at small scales. I will try to keep this explanation light on jargon.
+I did some digging and found out that Chrome optimizes JPEG rendering at small scales.
 
 ## How Chrome optimizes JPEGs at small scales
 
@@ -43,36 +43,46 @@ That information is not lost at random.
 
 When an image is scaled down heavily, the information that disaper is the the high-frequency one. And it's easy to understand this intuitively actually. Think of an image of a tree with lots of leaves and rough bark: those fine details change quickly from pixel to pixel, so they count as high-frequency information.
 
-If you scale that tree down to something tiny 2x1, you would end up with just a green pixel at the top for the foliage and a brown pixel at the bottom for the trunk. the scaled down version got rid of the fine detail.
+If you scale that tree down to something tiny like, 2x1, you would end up with just a green pixel at the top for the foliage and a brown pixel at the bottom for the trunk. the scaled down version got rid of the fine detail, the high frequency information.
+
+images example
+
+This high frequency information. stil somewhat survied as they are "mixed" together the the edges aren't so sharp.
 
 ### How JPEG stores image data
 
-JPEG works by splitting the image into 8 × 8 blocks and converting each block into the frequency domain. Very roughly speaking, each block can be described as a mix of patterns with different levels of detail.
+I will keep this explanation light on jargon/maths, but still provide a few technical term that can be a good starting ponint if you want to dig deeper. Still, I'll simplify a lot and will skip a good chunck of the whole jpeg transformation.
 
-The lowest frequency is basically a flat color with no change. The highest frequency looks like a checkerboard, with the value changing as much as possible. These patterns are called **basis functions**.
+During the compression for JPEG the images are splited into 8 × 8 blocks that are converted to the frequency domain, this operation is called a **DCT**.
 
+In this 8x8 block, the lowest frequency possible is a flat color (well, it's not really a frequency because it doesn't change). The highest frequency looks like a checkerboard, the value is changing as much as possible. And the whole frequency domain would be all the possible image in between. there are called **basis functions**.
+
+*discret cosinus transfrorm
 [image]
+The basis functions, you can see the flat color in the top left, and the checker board in the bottom right.
 
 So converting an 8 × 8 block into the frequency domain is basically asking: how much of each pattern is present in this block? Those amounts are called **coefficients**.
 
-JPEG compression has a few more steps after that to store those coefficients efficiently, but that is not important for what we are discussing here.
+JPEG compression has a few more steps after that to store those coefficients efficiently, and it's where the lossy compression happens, but that's not important for what we are discussing here.
 
 ### Putting it together: rendering a JPEG at 1/8 scale
 
 Now let’s say you want to shrink an image by a factor of 8.
 
-Those 8 × 8 blocks I mentioned earlier can now be represented by a single pixel in the downscaled image. At that size, the image mostly needs low-frequency information, because the high-frequency details disappear during scaling.
+Those 8 × 8 blocks I mentioned earlier can now be represented by a single pixel in the downscaled image. At that size, the image mostly needs low-frequency information, because, as in the example with the tree, the high-frequency details disappear during scaling.
 
-So instead of decompressing the whole JPEG, Chrome can skip the coefficients for the high-frequency parts and use only the ones needed for the coarse version of the image. That gives a scaled-down result without fully decoding the original image first.
+So instead of decompressing the whole JPEG, we can skip the coefficients for the high-frequency parts and use only the ones needed for the coarse version of the image. That gives a scaled-down result without fully decoding the original image first.
 
-It is faster, and it uses less memory.
+The decoded images takes less spaces and are faster to decode since we're skping a good chunk of the coefficients.
 
-This can be extended to other scaling ratios as long as they line up well with the JPEG block size.
+This can be exetended to other ratio, as long as they are fraction of 8. And it's technical name is "partial IDCT* scaling" see [jpegclub.org](https://jpegclub.org/djpeg/) (if you read a bit on this you'll see that this technique can also be used to upscale!)
 
-## How Chrome does it
+*Inverse discret cosinus transform, taking the frequency domain to the image domain.
 
-Chrome uses Skia for image decoding and rendering. For JPEGs, Skia can take advantage of libjpeg-turbo’s partial DCT scaling, which lets it decode only the lower-frequency data when the target size is small enough.
+## How Chrome fit in this
 
-In other words, Chrome does not always decode the full image and scale it afterward. When the scale is convenient, it can ask the JPEG decoder for a smaller version directly, which is much more efficient.
+Chrome delegate to Skia for image decoding and rendering. For JPEGs, Skia uses libjpeg-turbo’s, which implement partial IDCT scaling, which lets it decode only the lower-frequency data when the target size is small enough.
 
-That is why the image looked fine on some machines and badly scaled on mine: Chrome was using a low-scale JPEG optimization that exposed a rendering difference I had not expected.
+In other words, Chrome does not always decode the full image and scale it afterward. It compute the closest fraction of 8, decompress at this scale and then scales down the images more (using a more classic, downsampling algorithm) until they reaches the desired ratio.
+
+This why is the image had rought edges on my machine, being rendered so small, all the curves and nice transition werne't event present in the decompressed ouput. it was rendered at 1/8 using partial IDCT scaling, and then furter scaled down.
