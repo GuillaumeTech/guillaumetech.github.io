@@ -2,8 +2,7 @@
 title: "Weird JPEG artifacts and how Chrome optimize JPEG rendering"
 intro: "What looked like a rendering bug turned out to be a clever JPEG decoding optimization in Chrome."
 layout: ../../layouts/BlogPostLayout.astro
-pubDate: 2026-08-01
-editDate: 2026-07-26
+pubDate: 2026-08-03
 ---
 
 <style>
@@ -17,16 +16,18 @@ editDate: 2026-07-26
 
    img {
     width: 100%;
-  height: auto;
+    height: auto;
   }
 </style>
-## This icon looks better on my colleague computer. 
 
-A while back, when chatting with a colleague over their computer, I noticed that a logo did not look exactly the same as it did on mine. It looked thinner on theirs, and more faithful to the original image. It was rendered at 15px; here is an upscaled version. 
+## This icon looks better on my colleague computer.
+
+A while back, when chatting with a colleague over their computer, I noticed that a logo did not look exactly the same as it did on mine. It looked thinner on theirs, and more faithful to the original image. It was rendered at 15px; here is an upscaled version.
 
 Note: this was not the original image. It happened a while ago, so I made a new image to demonstrate the issue.
 
-On the left, Firefox; on the right, Chrome.
+![illustration of a tree being scaled down](../../assets/blog/compare.png)
+*On the left, Firefox; on the right, Chrome.*
 
 If you squint, or take a step back, the one from Chrome looks thicker. A bit weird, but swapping the image for an SVG fixed it. Still, I was curious: why was it rendering like this in the first place?
 
@@ -48,7 +49,7 @@ When an image is scaled down heavily, the information that disappears is mostly 
 
 If you scale that tree down to something tiny, like 20 × 10, you end up with just a green blob at the top for the foliage and a brown stick at the bottom for the trunk. The scaled-down version has thrown away the fine detail, the high-frequency information.
 ![illustration of a tree being scaled down](../../assets/blog/tree-example.jpg)
-<i>Illustration of a tree being scaled down</i>
+*Illustration of a tree being scaled down*
 
 Some of that high-frequency information still survives a little, because the details get mixed together.
 
@@ -60,7 +61,7 @@ During JPEG compression, images are split into 8 × 8 blocks that are converted 
 
 In an 8 × 8 block, the lowest possible frequency is a flat color. Strictly speaking, it is not really a frequency because nothing changes; it is the **constant component**. On the opposite side, the highest frequency looks like a checkerboard, where the value changes as much as possible. Everything in between represents the rest of the frequency domain. These are called **basis functions**.
 ![Basis functions](../../assets/blog/basisfunctions.png)
-<i>The basis functions: you can see the flat color in the top-left, and the checkerboard in the bottom-right.</i>
+*The basis functions: you can see the flat color in the top-left, and the checkerboard in the bottom-right.*
 
 So converting an 8 × 8 block into the frequency domain is basically asking: how much of each pattern is present in this block? Those amounts are called **coefficients**.
 
@@ -76,7 +77,7 @@ So instead of decompressing the whole JPEG, we can skip the coefficients for the
 
 The decoded image takes less space and is faster to uncompress, since we are skipping a good chunk of the coefficients.
 
-This can be extended to other ratios, as long as they are fractions of 8. The technical name for this is **partial IDCT scaling***. See [jpegclub.org](https://jpegclub.org/djpeg/) (if you read a bit on this, you will see that this technique can also be used to upscale images!).
+This can be extended to other ratios, as long as they are fractions of 8. The technical name for this is **partial IDCT scaling\***. See [jpegclub.org](https://jpegclub.org/djpeg/) (if you read a bit on this, you will see that this technique can also be used to upscale images!).
 
 \* Inverse discrete cosine transform: taking the frequency domain back to the image domain.
 
@@ -88,4 +89,6 @@ In other words, Chrome/Skia does not always decompress the full image and scale 
 
 That is why the image look thicker on my machine. Because it was rendered so small, it was decoded at 1/8 using partial IDCT scaling. So the only data from the frequency representation that remained was the constant component; all the edges softening and gradients were not used.
 
-Really, the moral here is that you should not use JPEG for icons and the like. The format and its optimizations are designed around our perception of photos. After all, it is in the name: the Joint **Photographic** Experts Group.
+Really, the moral here is that you should not use JPEG for icons and the like. The format and its optimizations are designed around our perception of photos.
+
+After all, it is in the name: Joint **Photographic** Experts Group.
