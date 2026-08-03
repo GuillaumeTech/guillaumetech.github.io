@@ -9,12 +9,12 @@ import Nav from "../components/Nav.astro";
 import Layout from "../layouts/Layout.astro";
 
 const images = Object.values(
-	import.meta.glob<{ default: ImageMetadata }>(
-		["../assets/*.jpg", "!**/firstthing.jpg"],
-		{
-			eager: true,
-		},
-	),
+  import.meta.glob<{ default: ImageMetadata }>(
+    ["../assets/*.jpg", "!**/firstthing.jpg"],
+    {
+      eager: true,
+    },
+  ),
 ).map((module) => module.default);
 const fallbackImage = images[Math.floor(Math.random() * images.length)];
 ---
@@ -37,26 +37,39 @@ const fallbackImage = images[Math.floor(Math.random() * images.length)];
         <div class="contact">
           <h2>Contact</h2>
           <ul>
-            <li><AnimatedLink href="https://github.com/GuillaumeTech">Github</AnimatedLink></li>
-            <li><AnimatedLink href="https://www.instagram.com/guillaume_tech/">Instagram</AnimatedLink></li>
+            <li>
+              <AnimatedLink href="https://github.com/GuillaumeTech"
+                >Github</AnimatedLink>
+            </li>
+            <li>
+              <AnimatedLink href="https://www.instagram.com/guillaume_tech/"
+                >Instagram</AnimatedLink>
+            </li>
           </ul>
         </div>
       </div>
       <div class="text-col">
         <h2>Latest</h2>
+        <h4>Weird JPEG artifacts and how Chrome optimize JPEG rendering</h4>
+        <p>
+          What looked like a rendering bug turned out to be a clever JPEG
+          decoding optimization in Chrome.
+        </p>
+        <span>
+          <AnimatedLink href="/posts/jpg-scaling-chrome"
+            >Read the post</AnimatedLink
+          >
+        </span>
         <h4>Gatura</h4>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam.
+          A geometric serif to use for display, currently with 67 glyphs:
+          uppercase, lowercase, numbers and !?-.,
         </p>
-
-        <h4>Test</h4>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam.
-        </p>
+        <span>
+          <AnimatedLink href="https://github.com/GuillaumeTech/gatura">
+            Go to Gatura repo
+          </AnimatedLink>
+        </span>
       </div>
       <div class="text-col random">
         <h4>A random image from my gallery</h4>
@@ -93,7 +106,7 @@ const fallbackImage = images[Math.floor(Math.random() * images.length)];
   .text-col {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
     hr {
       margin: 2rem 0;
     }
@@ -120,6 +133,9 @@ const fallbackImage = images[Math.floor(Math.random() * images.length)];
     }
     p {
       line-height: 130%;
+    }
+    h4 {
+      padding-top: 1rem;
     }
   }
 
