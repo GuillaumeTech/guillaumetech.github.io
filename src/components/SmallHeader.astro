@@ -1,10 +1,13 @@
 ---
 import Logo from "./Logo.astro";
+import { PAGE_COLORS } from "../colors";
+
+const blogAccent = PAGE_COLORS["/blog"].accent;
 ---
 
 <header class="site-header">
   <Logo />
-  <div class="separator"></div>
+  <div class="separator" style={`background: ${blogAccent};`}></div>
   <div class="subsection">
     <!-- only used for blog, add props when needed-->
     <a class="base-link" href="/blog">Blog</a>
@@ -24,7 +27,7 @@ import Logo from "./Logo.astro";
     position: relative;
     width: 12px;
     height: 1.7rem;
-    background: var(--accent-color-blog);
+
     align-self: center;
   }
 

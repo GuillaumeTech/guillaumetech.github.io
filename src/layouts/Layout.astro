@@ -1,9 +1,21 @@
+---
+import { getPageColors } from "../colors";
+
+const colors = getPageColors(Astro.url.pathname);
+
+// Build favicon SVG with actual colors
+const faviconSvg = `<svg width="165" height="165" viewBox="0 0 165 165" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="165" height="165" fill="${colors.bg}"/><rect y="47" width="67" height="75" fill="${colors.accent}"/><path d="M94.098 80.887C94.098 83.9303 94.43 87.0567 95.094 90.266C95.758 93.42 96.8093 96.3527 98.248 99.064C99.6867 101.775 101.54 103.961 103.809 105.621C106.078 107.226 108.817 108.028 112.026 108.028C113.243 108.028 114.571 107.89 116.01 107.613C117.504 107.281 118.777 106.755 119.828 106.036C120.935 105.261 121.488 104.238 121.488 102.965V98.649C121.488 95.495 121.045 93.254 120.16 91.926C119.275 90.598 118.14 89.7957 116.757 89.519C115.429 89.2423 114.046 89.104 112.607 89.104H112.026C111.196 89.104 110.781 88.689 110.781 87.859V85.369C110.781 84.539 111.196 84.124 112.026 84.124H138.171C139.001 84.124 139.416 84.539 139.416 85.369V87.859C139.416 88.689 139.001 89.104 138.171 89.104H137.507C136.068 89.104 135.349 90.017 135.349 91.843V100.807C133.468 105.234 130.341 108.886 125.97 111.763C121.599 114.64 116.259 116.079 109.951 116.079C105.303 116.079 101.125 115.277 97.418 113.672C93.7107 112.067 90.5567 109.826 87.956 106.949C85.3553 104.072 83.3633 100.724 81.98 96.906C80.5967 93.088 79.905 88.9657 79.905 84.539C79.905 81.7723 80.2093 78.8673 80.818 75.824C81.4267 72.7807 82.4227 69.848 83.806 67.026C85.2447 64.1487 87.126 61.5757 89.45 59.307C91.8293 56.983 94.7343 55.157 98.165 53.829C101.651 52.4457 105.773 51.754 110.532 51.754C114.516 51.754 117.947 52.252 120.824 53.248C123.757 54.244 126.191 55.5167 128.128 57.066C130.065 58.6153 131.586 60.22 132.693 61.88C133.855 63.54 134.685 65.0893 135.183 66.528C135.681 67.9113 135.93 68.9627 135.93 69.682C135.93 70.18 135.792 70.5397 135.515 70.761C135.294 70.9823 134.962 71.176 134.519 71.342L124.393 74.911C124.172 74.9663 123.923 75.0493 123.646 75.16C123.425 75.2153 123.176 75.243 122.899 75.243C122.678 75.243 122.456 75.2153 122.235 75.16C122.014 75.0493 121.903 74.8003 121.903 74.413C121.903 74.1363 121.931 73.8043 121.986 73.417C122.041 72.9743 122.069 72.3933 122.069 71.674C122.069 67.856 121.045 64.6743 118.998 62.129C117.006 59.5837 113.963 58.311 109.868 58.311C106.714 58.311 103.947 59.2793 101.568 61.216C99.1887 63.0973 97.335 65.7257 96.007 69.101C94.7343 72.4763 94.098 76.405 94.098 80.887Z" fill="${colors.primary}"/></svg>`;
+
+const faviconDataUri = `data:image/svg+xml,${encodeURIComponent(faviconSvg)}`;
+
+const bodyStyle = `--primary-text-color:${colors.primary};--secondary-text-color:${colors.secondary};--background-color:${colors.bg};--accent-color:${colors.accent};`;
+---
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={faviconDataUri} />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content="Guillaume Técher — Personal website" />
@@ -15,7 +27,7 @@
       rel="stylesheet"
     />
   </head>
-  <body>
+  <body style={bodyStyle}>
     <div class="layout-container">
       <slot />
     </div>
@@ -31,21 +43,7 @@
     padding: 0;
   }
 
-  body {
-    --primary-text-color: #1a1a1a;
-    --secondary-text-color: #2e2e2e;
-    --background-color: #f3fcff;
-    --accent-color: #e8a020;
 
-    --accent-color-about: #5c9cfd;
-    --accent-color-blog: #ffe100;
-    --accent-color-photography: #ff8090;
-    --accent-color-projects: #74da58;
-    --accent-color-home: #e8a020;
-    --accent-color-resume: #8047fd;
-
-    --background-color-blog: rgb(234, 231, 225);
-  }
 
   html,
   body {

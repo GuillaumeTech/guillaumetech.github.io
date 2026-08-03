@@ -1,4 +1,6 @@
 ---
+import { PAGE_COLORS } from "../colors";
+
 const pathname = Astro.url.pathname;
 
 const links = [
@@ -14,10 +16,12 @@ const links = [
   {
     links.map(({ href, label }) => {
       const isActive = pathname === href || pathname.startsWith(href + "/");
+      const linkColor = PAGE_COLORS[href as keyof typeof PAGE_COLORS]?.accent || 'var(--accent-color)';
       return (
         <a
           href={href}
           class:list={["nav-link", { active: isActive }]}
+          style={`--link-accent: ${linkColor};`}
           aria-current={isActive ? "page" : undefined}
         >
           {label}
@@ -44,13 +48,6 @@ const links = [
     padding: 10px 0;
     position: relative;
   }
-
-
-  .nav-link:nth-child(1) { --link-accent: var(--accent-color-about); }
-  .nav-link:nth-child(2) { --link-accent: var(--accent-color-projects); }
-  .nav-link:nth-child(3) { --link-accent: var(--accent-color-photography); }
-  .nav-link:nth-child(4) { --link-accent: var(--accent-color-blog); }
-  .nav-link:nth-child(5) { --link-accent: var(--accent-color-resume); }
 
   .nav-link::before {
     content: "";

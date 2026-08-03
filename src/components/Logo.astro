@@ -1,9 +1,17 @@
 ---
+import { PAGE_COLORS } from "../colors";
+
 const isHome = Astro.url.pathname === "/";
+const homeAccent = PAGE_COLORS["/"].accent;
 ---
 
 <div class="logo">
-  <a href="/" class:list={["logo-name", { active: isHome }]} aria-current={isHome ? "page" : undefined}>Guillaume Técher</a>
+  <a 
+    href="/" 
+    class:list={["logo-name", { active: isHome }]} 
+    style={`--logo-accent: ${homeAccent};`}
+    aria-current={isHome ? "page" : undefined}
+  >Guillaume Técher</a>
 </div>
 
 <style>
@@ -28,7 +36,7 @@ const isHome = Astro.url.pathname === "/";
     left: -20px;
     width: 12px;
     height: 0rem;
-    background-color: var(--accent-color-home);
+    background-color: var(--logo-accent);
     transition: height 150ms ease-in-out;
   }
 
