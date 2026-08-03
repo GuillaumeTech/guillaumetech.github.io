@@ -9,11 +9,11 @@ import Nav from "../components/Nav.astro";
 import Layout from "../layouts/Layout.astro";
 
 interface BlogPost {
-	url: string;
-	frontmatter: { title: string; intro: string };
+  url: string;
+  frontmatter: { title: string; intro: string; pubDate: string };
 }
 const posts: BlogPost[] = Object.values(
-	import.meta.glob("./posts/*.md", { eager: true }),
+  import.meta.glob("./posts/*.md", { eager: true }),
 );
 ---
 
@@ -27,14 +27,20 @@ const posts: BlogPost[] = Object.values(
   <main class="page-content">
     <Grid>
       {
-        posts.map((post: BlogPost) => (
-          <a href={post.url}>
-            <Cell>
-              <h4>{post.frontmatter.title}</h4>
-              <BodyText>{post.frontmatter.intro}</BodyText>
-            </Cell>
-          </a>
-        ))
+        posts
+          .sort(
+            (postA, postB) =>
+              new Date(postB.frontmatter.pubDate).getTime() -
+              new Date(postA.frontmatter.pubDate).getTime(),
+          )
+          .map((post) => (
+            <a href={post.url}>
+              <Cell>
+                <h4>{post.frontmatter.title}</h4>
+                <BodyText>{post.frontmatter.intro}</BodyText>
+              </Cell>
+            </a>
+          ))
       }
     </Grid>
   </main>
@@ -47,5 +53,4 @@ const posts: BlogPost[] = Object.values(
       text-decoration: none;
     }
   }
-
 </style>
