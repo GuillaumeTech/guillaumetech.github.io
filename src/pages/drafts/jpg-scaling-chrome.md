@@ -15,7 +15,7 @@ editDate: 2026-07-26
     background: rgba(0, 0, 0, 0.02);
   }
 
-  img {
+   img {
     width: 100%;
   height: auto;
   }
@@ -23,14 +23,12 @@ editDate: 2026-07-26
 
 ## The problem
 
-Here is what I saw on my machine:
+A while back, when chating with a colleague over their computer, I noticed that a logo didn't look exactly as it did on mine. It looked thiner on theirs, more faithfull to the original image. It was rendered a 15px, here is an upscladed version. Quick note: this was not the original image. This happened a while ago, so I made a image to demonstrate the issue.
 
-My computer: badly scaled down
-My colleagues': scaled down fine
+![Basis functions](../../assets/blog/compare.png)
+<i>On the left firefox, on the right Chrome</i>
 
-Note: this was not the original logo. This happened a while ago, so I made a separate image to reproduce the issue.
-
-Swapping the image for an SVG fixed it. But I was curious: why was it rendering like this in the first place?
+If you squint, or take a step back, the one from Chrome looks thicker. A bit weird, but swapping the image for an SVG fixed it. Still I was curious: why was it rendering like this in the first place?
 
 I did some digging and found a nifty optimization that Chrome does when rendering JPEG at small scales.
 
