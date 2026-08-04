@@ -1,0 +1,14 @@
+---
+
+import AnimatedLink from "../components/AnimatedLink.astro";
+import Greetings from "../components/Greetings.astro";
+import Header from "../components/Header.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+
+<Layout>
+  <Header>
+    <Greetings greeting={<AnimatedLink href="/">404, You're lost! Go home</AnimatedLink>} />
+  </Header>
+</Layout>
