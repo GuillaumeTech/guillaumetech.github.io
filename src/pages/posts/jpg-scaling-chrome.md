@@ -85,7 +85,7 @@ This can be extended to other ratios, as long as they are fractions of 8. The te
 
 Chrome delegates image decoding and rendering to Skia. For JPEGs, Skia uses libjpeg-turbo, which implements partial IDCT scaling. That lets it decode only the lower-frequency data when the target size is small enough.
 
-In other words, Chrome/Skia does not always decompress the full image and scale it afterward. It computes the closest fraction of 8, decodes at that scale, [source](https://github.com/google/skia/blob/30ad01017a46a31859b580bc907457b0e43907a8/src/codec/SkJpegCodec.cpp#L383). Then it scales the image further using a more traditional downsampling algorithm until it reaches the desired size.
+In other words, Chrome/Skia does not always decompress the full image and scale it afterward. It [computes the closest fraction of 8](https://github.com/google/skia/blob/30ad01017a46a31859b580bc907457b0e43907a8/src/codec/SkJpegCodec.cpp#L383), decodes at that scale. Then it scales the image further using a more traditional downsampling algorithm until it reaches the desired size.
 
 That is why the image look thicker on my machine. Because it was rendered so small, it was decoded at 1/8 using partial IDCT scaling. So the only data from the frequency representation that remained was the constant component; all the edges softening and gradients were not used.
 
