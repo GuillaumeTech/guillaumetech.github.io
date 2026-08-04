@@ -1,5 +1,5 @@
 ---
-title: "Weird JPEG artifacts and how Chrome optimize JPEG rendering"
+title: "Weird JPEG artifacts and how Chrome optimizes JPEG rendering"
 intro: "What looked like a rendering bug turned out to be a clever JPEG decoding optimization in Chrome."
 layout: ../../layouts/BlogPostLayout.astro
 pubDate: 2026-08-03
@@ -20,7 +20,7 @@ pubDate: 2026-08-03
   }
 </style>
 
-## This icon looks better on my colleague computer.
+## This icon looks better on my colleague's computer.
 
 A while back, when chatting with a colleague over their computer, I noticed that a logo did not look exactly the same as it did on mine. It looked thinner on theirs, and more faithful to the original image. It was rendered at 15px; here is an upscaled version.
 
