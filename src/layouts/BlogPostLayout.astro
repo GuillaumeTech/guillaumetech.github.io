@@ -7,22 +7,21 @@ import Layout from "./Layout.astro";
 const pubDate = new Date(frontmatter.pubDate);
 
 const dateString = pubDate.toLocaleDateString("en-US", {
-	weekday: "long",
-	year: "numeric",
-	month: "long",
-	day: "numeric",
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
 });
 ---
 
 <Layout>
   <SmallHeader />
   <article>
-    <hr />
-    <p>{dateString}</p>
+    <p class="date">{dateString}</p>
 
     <h1>{frontmatter.title}</h1>
-    <p>{frontmatter.intro}</p>
-    <hr />
+    <p class="intro">{frontmatter.intro}</p>
+
     <div class="blog-content">
       <slot />
     </div>
@@ -31,7 +30,6 @@ const dateString = pubDate.toLocaleDateString("en-US", {
 
 <style>
   h1 {
-    font-family: "Young Serif", Georgia, serif;
     margin: 1rem 0rem;
     margin-top: 2rem;
   }
@@ -40,6 +38,13 @@ const dateString = pubDate.toLocaleDateString("en-US", {
     margin: 2rem 0;
   }
 
+  p.intro {
+    margin: 0;
+  }
+
+  p.date {
+    margin: 1rem 0;
+  }
 
   /* global style so the style reach within the slots
  not ideal but also this is only used with blogpost as implied by the name
@@ -49,11 +54,11 @@ const dateString = pubDate.toLocaleDateString("en-US", {
     h2,
     h3,
     h4 {
-      margin: 1rem 0rem;
+      margin: 0.5rem 0rem;
       margin-top: 2rem;
     }
 
-     p {
+    p {
       margin-top: 0.5rem;
       margin-bottom: 1rem;
     }

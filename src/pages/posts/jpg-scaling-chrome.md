@@ -48,6 +48,7 @@ An interesting insight is that the information lost is not random.
 When an image is scaled down heavily, the information that disappears is mostly the high-frequency detail. This is easy to see intuitively. Think of a tree with lots of leaves and rough bark: those fine details change quickly from pixel to pixel, so they count as high-frequency information.
 
 If you scale that tree down to something tiny, like 20 × 10, you end up with just a green blob at the top for the foliage and a brown stick at the bottom for the trunk. The scaled-down version has thrown away the fine detail, the high-frequency information.
+
 ![illustration of a tree being scaled down](../../assets/blog/tree-example.jpg)
 *Illustration of a tree being scaled down*
 
@@ -60,6 +61,7 @@ I will keep this explanation light on jargon and math, but I will still mention 
 During JPEG compression, images are split into 8 × 8 blocks that are converted into the frequency domain. This operation is called a **DCT** (Discrete Cosine Transform).
 
 In an 8 × 8 block, the lowest possible frequency is a flat color. Strictly speaking, it is not really a frequency because nothing changes; it is the **constant component**. On the opposite side, the highest frequency looks like a checkerboard, where the value changes as much as possible. Everything in between represents the rest of the frequency domain. These are called **basis functions**.
+
 ![Basis functions](../../assets/blog/basisfunctions.png)
 *The basis functions: you can see the flat color in the top-left, and the checkerboard in the bottom-right.*
 
