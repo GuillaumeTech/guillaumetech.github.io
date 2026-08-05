@@ -10,7 +10,7 @@ import Layout from "../layouts/Layout.astro";
 
 const images = Object.values(
 	import.meta.glob<{ default: ImageMetadata }>(
-		["../assets/*.{jpg,png}", "!**/firstthing.jpg"],
+		["../assets/*.{jpg,png}"],
 		{
 			eager: true,
 		},
