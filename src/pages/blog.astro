@@ -9,11 +9,11 @@ import Nav from "../components/Nav.astro";
 import Layout from "../layouts/Layout.astro";
 
 interface BlogPost {
-  url: string;
-  frontmatter: { title: string; intro: string; pubDate: string };
+	url: string;
+	frontmatter: { title: string; intro: string; pubDate: string };
 }
 const posts: BlogPost[] = Object.values(
-  import.meta.glob("./posts/*.md", { eager: true }),
+	import.meta.glob("./posts/*.md", { eager: true }),
 );
 ---
 

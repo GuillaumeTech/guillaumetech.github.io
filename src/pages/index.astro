@@ -9,12 +9,12 @@ import Nav from "../components/Nav.astro";
 import Layout from "../layouts/Layout.astro";
 
 const images = Object.values(
-  import.meta.glob<{ default: ImageMetadata }>(
-    ["../assets/*.jpg|*.png", "!**/firstthing.jpg"],
-    {
-      eager: true,
-    },
-  ),
+	import.meta.glob<{ default: ImageMetadata }>(
+		["../assets/*.{jpg,png}", "!**/firstthing.jpg"],
+		{
+			eager: true,
+		},
+	),
 ).map((module) => module.default);
 const fallbackImage = images[Math.floor(Math.random() * images.length)];
 ---
