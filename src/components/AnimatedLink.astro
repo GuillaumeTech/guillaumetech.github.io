@@ -12,6 +12,7 @@ const { href, target = "_blank" } = Astro.props;
 
 <style>
   .base-link {
+    display: inline-block;
     font-weight: 600;
     position: relative;
     clip-path: inset(-5px 0);
@@ -37,11 +38,11 @@ const { href, target = "_blank" } = Astro.props;
       var(--secondary-text-color)
     );
     transition: transform 250ms ease-in-out;
-    transform: translate3d(-50%, 0, 0);
+    transform: translateX(-50%);
   }
 
   .base-link:hover::after {
-    transform: translate3d(0, 0, 0);
+    transform: translateX(0);
   }
 
   @media (prefers-reduced-motion: reduce) {

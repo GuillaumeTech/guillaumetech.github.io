@@ -3,7 +3,7 @@ title: "Sliding color change underline on hover"
 intro: "I wanted this effect for the in-text links on my website, but I could not find a ready-made one that did what I wanted, so here is a short tutorial"
 layout: ../../layouts/BlogPostLayout.astro
 pubDate: 2026-07-25
-editDate: 2026-07-26
+editDate: 2026-08-11
 ---
 
 <style>
@@ -16,6 +16,7 @@ editDate: 2026-07-26
   }
 
   .demo-link {
+    display: inline-block;
     position: relative;
     clip-path: inset(-5px 0);
     color: black;
@@ -32,11 +33,11 @@ editDate: 2026-07-26
     height: 2px;
     background: linear-gradient(to right, limegreen, limegreen 50%, black 50%, black);
     transition: transform 250ms ease-in-out;
-    transform: translate3d(-50%, 0, 0);
+    transform: translateX(-50%);
   }
 
   .demo-link:hover::after {
-    transform: translate3d(0, 0, 0);
+    transform: translateX(0);
   }
 
   .demo-link.overflow {
@@ -56,6 +57,7 @@ This style transitions from black to green like so: <a href="#" class="demo-link
 
 ```css
 a {
+  display: inline-block;
   position: relative;
   clip-path: inset(-5px 0);
 }
@@ -69,11 +71,11 @@ a::after {
   height: 1px;
   background: linear-gradient(to right, limegreen, limegreen 50%, black 50%, black);
   transition: transform 250ms ease-in-out;
-  transform: translate3d(-50%, 0, 0);
+  transform: translateX(-50%);
 }
 
 a:hover::after {
-  transform: translate3d(0, 0, 0);
+  transform: translateX(0);
 }
 ```
 
@@ -95,7 +97,9 @@ Here is an example of what the animated underline with the gradient looks like:
 
 Now we need to hide the overflowing gradient outside our link. So `overflow: hidden`, right?
 
-The problem is that we need `display: inline-block` for `overflow: hidden` to actually work! But with `display: inline-block`, it's no longer aligned properly with the text and it's slightly cropped (the line is only 1px, whereas it was 2px before):
+The problem is that we need `display: inline-block` for `overflow: hidden` to actually work! But that combination changes the link's baseline and slightly crops the underline (the line is only 1px, whereas it was 2px before):
+
+* Edit 2026-08-11: `vertical-align` could fix the alignement of the base line, but we would still have the croping problem.
 
 <div class="demo-box">
   Lorem ipsum dolor sit <a href="#" class="demo-link bad-align">BADABIM!</a> amet
@@ -108,6 +112,8 @@ Another way to hide overflow is `clip-path`, which is way more flexible, you can
 It also provides us with a useful function, `inset()`, which "defines a rectangle at the specified inset distances from each side of the reference box" <sup><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/basic-shape/inset" target="_blank">MDN</a></sup>.
 
 By using `clip-path: inset(-5px 0);`, we cut off horizontal overflow to the left and right (`0`) while allowing slight vertical room (`-5px`) so the underline thickness doesn't get clipped on top or bottom.
+
+We still keep `display: inline-block`. Safari has trouble clipping regular inline boxes, but an inline block gives it one clean box to clip without the baseline problem caused by `overflow: hidden`.
 
 ## That's it!
 
