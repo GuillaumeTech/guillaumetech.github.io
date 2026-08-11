@@ -1,5 +1,5 @@
 ---
-title: "Weird JPEG artifacts and how Chrome optimizes JPEG rendering"
+title: "Why Tiny JPEGs Look Different in Chrome"
 intro: "What looked like a rendering bug turned out to be a clever JPEG decoding optimization in Chrome."
 layout: ../../layouts/BlogPostLayout.astro
 pubDate: 2026-08-03
@@ -20,9 +20,9 @@ pubDate: 2026-08-03
   }
 </style>
 
-## This icon looks better on my colleague's computer.
+## This icon looks better on my colleague's computer
 
-A while back, when chatting with a colleague over their computer, I noticed that a logo did not look exactly the same as it did on mine. It looked thinner on theirs, and more faithful to the original image. It was rendered at 15px; here is an upscaled version.
+A while back, when chatting with a colleague over their computer, I noticed that a logo did not look exactly the same as it did on mine. It looked thinner on theirs and more faithful to the original image. It was rendered at 15px; here is an upscaled version.
 
 Note: this was not the original image. It happened a while ago, so I made a new image to demonstrate the issue.
 
@@ -31,7 +31,7 @@ Note: this was not the original image. It happened a while ago, so I made a new 
 
 If you squint, or take a step back, the one from Chrome looks thicker. A bit weird, but swapping the image for an SVG fixed it. Still, I was curious: why was it rendering like this in the first place?
 
-I did some digging and found a nifty optimization that Chrome does when rendering JPEGs at small scales.
+I did some digging and found a nifty optimization that Chrome uses when rendering JPEGs at small scales.
 
 ## Scaling down images can be wasteful
 
@@ -52,7 +52,7 @@ If you scale that tree down to something tiny, like 20 × 10, you end up with ju
 ![illustration of a tree being scaled down](../../assets/blog/tree-example.jpg)
 *Illustration of a tree being scaled down*
 
-Some of that high-frequency information still survives a little, because the details get mixed together.
+Some of that high-frequency information still survives to an extent, because the details get mixed together.
 
 ## How JPEG stores image data
 
@@ -60,7 +60,7 @@ I will keep this explanation light on jargon and math, but I will still mention 
 
 During JPEG compression, images are split into 8 × 8 blocks that are converted into the frequency domain. This operation is called a **DCT** (Discrete Cosine Transform).
 
-In an 8 × 8 block, the lowest possible frequency is a flat color. Strictly speaking, it is not really a frequency because nothing changes; it is the **constant component**. On the opposite side, the highest frequency looks like a checkerboard, where the value changes as much as possible. Everything in between represents the rest of the frequency domain. These are called **basis functions**.
+In an 8 × 8 block, the lowest possible frequency is a flat color. Strictly speaking, it is not really a frequency because nothing changes; it is the **constant component**. At the opposite end, the highest frequency looks like a checkerboard, where the value changes as much as possible. Everything in between represents the rest of the frequency domain. These are called **basis functions**.
 
 ![Basis functions](../../assets/blog/basisfunctions.png)
 *The basis functions: you can see the flat color in the top-left, and the checkerboard in the bottom-right.*
@@ -79,7 +79,7 @@ So instead of decompressing the whole JPEG, we can skip the coefficients for the
 
 The decoded image takes less space and is faster to uncompress, since we are skipping a good chunk of the coefficients.
 
-This can be extended to other ratios, as long as they are fractions of 8. The technical name for this is **partial IDCT scaling\***. See [jpegclub.org](https://jpegclub.org/djpeg/) (if you read a bit on this, you will see that this technique can also be used to upscale images!).
+This can be extended to other ratios, as long as they are fractions with a denominator of 8. The technical name for this is **partial IDCT scaling\***. See [jpegclub.org](https://jpegclub.org/djpeg/) (if you read a bit on this, you will see that this technique can also be used to upscale images!).
 
 \* Inverse discrete cosine transform: taking the frequency domain back to the image domain.
 
@@ -87,9 +87,9 @@ This can be extended to other ratios, as long as they are fractions of 8. The te
 
 Chrome delegates image decoding and rendering to Skia. For JPEGs, Skia uses libjpeg-turbo, which implements partial IDCT scaling. That lets it decode only the lower-frequency data when the target size is small enough.
 
-In other words, Chrome/Skia does not always decompress the full image and scale it afterward. It [computes the closest fraction of 8](https://github.com/google/skia/blob/30ad01017a46a31859b580bc907457b0e43907a8/src/codec/SkJpegCodec.cpp#L383), decodes at that scale. Then it scales the image further using a more traditional downsampling algorithm until it reaches the desired size.
+In other words, Chrome/Skia does not always decompress the full image and scale it afterward. It [computes the closest fraction with a denominator of 8](https://github.com/google/skia/blob/30ad01017a46a31859b580bc907457b0e43907a8/src/codec/SkJpegCodec.cpp#L383) and decodes the image at that scale. It then scales the image further using a more traditional downsampling algorithm until it reaches the desired size.
 
-That is why the image look thicker on my machine. Because it was rendered so small, it was decoded at 1/8 using partial IDCT scaling. So the only data from the frequency representation that remained was the constant component; all the edges softening and gradients were not used.
+That is why the image looked thicker on my machine. Because it was rendered so small, it was decoded at one-eighth scale using partial IDCT scaling. So the only data from the frequency representation that remained was the constant component; all the edge softening and gradients were not used.
 
 Really, the moral here is that you should not use JPEG for icons and the like. The format and its optimizations are designed around our perception of photos.
 
