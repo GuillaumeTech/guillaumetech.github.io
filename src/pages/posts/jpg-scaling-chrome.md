@@ -39,7 +39,7 @@ The intuitive way to render a small image from a JPEG is to fully decompress it 
 
 But that is not always efficient.
 
-Imagine a 2000 × 2000 JPEG that needs to be displayed at 20 × 20. Once uncompressed, the image takes far more space in memory than the final result. A bitmap of the full image uses roughly 12 MB, while the final 20 × 20 image only needs about 1.2 KB. Most of the information in the large version is lost when scaling down.
+Imagine a 2000 × 2000 JPEG that needs to be displayed at 20 × 20. Once uncompressed, the image takes far more memory than the final result. A bitmap of the full image uses roughly 12 MB, while the final 20 × 20 image needs only about 1.2 KB. Most of the information in the large version is lost when scaling down.
 
 ## What information is lost when scaling down?
 

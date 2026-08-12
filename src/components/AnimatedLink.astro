@@ -13,7 +13,7 @@ const { href, target = "_blank" } = Astro.props;
 
 <style>
   .base-link {
-    display: inline;
+    display: inline-block;
     font-weight: 600;
     position: relative;
     clip-path: inset(-5px 0);
@@ -29,7 +29,7 @@ const { href, target = "_blank" } = Astro.props;
   .base-link::after {
     content: "";
     position: absolute;
-    bottom: 0px;
+    bottom: 1.5px;
     left: 0;
     width: 250%;
     height: 1px;
