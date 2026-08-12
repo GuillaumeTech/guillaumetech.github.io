@@ -22,18 +22,21 @@ editDate: 2026-08-11
     color: black;
     font-weight: 600;
     text-decoration: none;
+    paint-order: stroke fill;
+    -webkit-text-stroke: 0.3em var(--background-color);
   }
 
   .demo-link::after {
     content: "";
     position: absolute;
-    bottom: -1px;
+    bottom: 0px;
     left: 0;
     width: 250%;
-    height: 2px;
+    height: 1px;
     background: linear-gradient(to right, limegreen, limegreen 50%, black 50%, black);
     transition: transform 250ms ease-in-out;
     transform: translateX(-50%);
+    z-index: -1;
   }
 
   .demo-link:hover::after {
@@ -49,6 +52,11 @@ editDate: 2026-08-11
     display: inline-block;
     overflow: hidden;
   }
+
+  .demo-link.descender {
+     paint-order: none;
+    -webkit-text-stroke: unset;
+  }
 </style>
 
 ## Skip the chit-chat, here is the code:
@@ -60,6 +68,8 @@ a {
   display: inline-block;
   position: relative;
   clip-path: inset(-5px 0);
+  paint-order: stroke fill;
+  -webkit-text-stroke: 0.3em var(--background-color);
 }
 
 a::after {
@@ -69,9 +79,16 @@ a::after {
   left: 0;
   width: 250%;
   height: 1px;
-  background: linear-gradient(to right, limegreen, limegreen 50%, black 50%, black);
+  background: linear-gradient(
+    to right,
+    limegreen,
+    limegreen 50%,
+    black 50%,
+    black
+  );
   transition: transform 250ms ease-in-out;
   transform: translateX(-50%);
+  z-index: -1;
 }
 
 a:hover::after {
@@ -97,9 +114,9 @@ Here is an example of what the animated underline with the gradient looks like:
 
 Now we need to hide the overflowing gradient outside our link. So `overflow: hidden`, right?
 
-The problem is that we need `display: inline-block` for `overflow: hidden` to actually work! But that combination changes the link's baseline and slightly crops the underline (the line is only 1px, whereas it was 2px before):
+The problem is that we need `display: inline-block` for `overflow: hidden` to actually work! But that combination changes the link's baseline and limits us to where the underline could be positioned, a bit too far from the text and it's not visible anymore.
 
-* Edit 2026-08-11: `vertical-align` could fix the alignement of the base line, but we would still have the croping problem.
+Edit 2026-08-11: `vertical-align` could fix the alignement of the base line, but we would still have the cropping problem.
 
 <div class="demo-box">
   Lorem ipsum dolor sit <a href="#" class="demo-link bad-align">BADABIM!</a> amet
@@ -114,6 +131,15 @@ It also provides us with a useful function, `inset()`, which "defines a rectangl
 By using `clip-path: inset(-5px 0);`, we cut off horizontal overflow to the left and right (`0`) while allowing slight vertical room (`-5px`) so the underline thickness doesn't get clipped on top or bottom.
 
 We still keep `display: inline-block`. Safari has trouble clipping regular inline boxes, but an inline block gives it one clean box to clip without the baseline problem caused by `overflow: hidden`.
+
+## Arf! descenders
+
+<div class="demo-box">
+  eh <a href="#" class="demo-link descendern">paf!</a> The underline touches the bottom of the p
+</div>
+
+There are two way to go about this either you can position the underline lower, but I'm not fond of this option. Or we can try to reproduce `text-decoration-skip-ink`, which I prefer. For this we use `-webkit-text-stroke` which allow-us to draw a outline of our text in the same color as the background, effectively "eating" at the underline. We also use `paint-order: stroke fill;` to have the stroke grow outide the text.
+
 
 ## That's it!
 

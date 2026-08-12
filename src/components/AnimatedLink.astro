@@ -1,4 +1,5 @@
 ---
+
 interface Props {
 	href?: string;
 	target?: string;
@@ -12,10 +13,12 @@ const { href, target = "_blank" } = Astro.props;
 
 <style>
   .base-link {
-    display: inline-block;
+    display: inline;
     font-weight: 600;
     position: relative;
     clip-path: inset(-5px 0);
+    paint-order: stroke fill;
+    -webkit-text-stroke: 0.3em var(--background-color);
   }
 
   .base-link:hover {
@@ -26,7 +29,7 @@ const { href, target = "_blank" } = Astro.props;
   .base-link::after {
     content: "";
     position: absolute;
-    bottom: -1px;
+    bottom: 0px;
     left: 0;
     width: 250%;
     height: 1px;
@@ -39,6 +42,7 @@ const { href, target = "_blank" } = Astro.props;
     );
     transition: transform 250ms ease-in-out;
     transform: translateX(-50%);
+    z-index: -1;
   }
 
   .base-link:hover::after {
