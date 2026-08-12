@@ -7,11 +7,12 @@ import Header from "../components/Header.astro";
 import Logo from "../components/Logo.astro";
 import Nav from "../components/Nav.astro";
 import Layout from "../layouts/Layout.astro";
+import BodyText from "../components/BodyText.astro";
 
 const images = Object.values(
-	import.meta.glob<{ default: ImageMetadata }>(["../assets/*.{jpg,png}"], {
-		eager: true,
-	}),
+  import.meta.glob<{ default: ImageMetadata }>(["../assets/*.{jpg,png}"], {
+    eager: true,
+  }),
 ).map((module) => module.default);
 const fallbackImage = images[Math.floor(Math.random() * images.length)];
 ---
@@ -55,25 +56,25 @@ const fallbackImage = images[Math.floor(Math.random() * images.length)];
       <div class="text-col">
         <h2>Latest</h2>
         <h4>Why Tiny JPEGs Look Different in Chrome</h4>
-        <p>
+        <BodyText>
           What looked like a rendering bug turned out to be a clever JPEG
           decoding optimization in Chrome.
-        </p>
-        <span>
+        </BodyText>
+        <BodyText>
           <AnimatedLink href="/posts/jpg-scaling-chrome"
             >Read the post</AnimatedLink
           >
-        </span>
+        </BodyText>
         <h4>Gatura</h4>
-        <p>
+        <BodyText>
           A geometric serif to use for display, currently with 67 glyphs:
           uppercase, lowercase, numbers, and !?-.,
-        </p>
-        <span>
+        </BodyText>
+        <BodyText>
           <AnimatedLink href="https://github.com/GuillaumeTech/gatura">
             Visit the Gatura repository
           </AnimatedLink>
-        </span>
+        </BodyText>
       </div>
       <div class="text-col random">
         <h4>A random image from my gallery</h4>
@@ -134,9 +135,6 @@ const fallbackImage = images[Math.floor(Math.random() * images.length)];
     }
     &.random {
       text-align: right;
-    }
-    p {
-      line-height: 130%;
     }
     h4 {
       padding-top: 1rem;
