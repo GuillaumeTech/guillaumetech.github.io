@@ -1,6 +1,7 @@
 ---
-import { getPageColors } from "../colors";
 import { ClientRouter } from "astro:transitions";
+import { getPageColors } from "../colors";
+
 const colors = getPageColors(Astro.url.pathname);
 
 // Build favicon SVG with actual colors
