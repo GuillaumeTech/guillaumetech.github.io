@@ -3,6 +3,7 @@ title: "Why Tiny JPEGs Look Different in Chrome"
 intro: "What looked like a rendering bug turned out to be a clever JPEG decoding optimization in Chrome."
 layout: ../../layouts/BlogPostLayout.astro
 pubDate: 2026-08-03
+editDate: 2026-08-12
 ---
 
 <style>
@@ -90,6 +91,8 @@ Chrome delegates image decoding and rendering to Skia. For JPEGs, Skia uses libj
 In other words, Chrome/Skia does not always decompress the full image and scale it afterward. It [computes the closest fraction with a denominator of 8](https://github.com/google/skia/blob/30ad01017a46a31859b580bc907457b0e43907a8/src/codec/SkJpegCodec.cpp#L383) and decodes the image at that scale. It then scales the image further using a more traditional downsampling algorithm until it reaches the desired size.
 
 That is why the image looked thicker on my machine. Because it was rendered so small, it was decoded at one-eighth scale using partial IDCT scaling. So the only data from the frequency representation that remained was the constant component; all the edge softening and gradients were not used.
+
+Correction 12-08-2026 : Someone on [Hacker news](https://news.ycombinator.com/item?id=49273283) pointed out that the scaling algorithm used can play a significant role in how the image looks. So the resulting degradation is actually a mix of IDCT and scaling algorithm.
 
 Really, the moral here is that you should not use JPEG for icons and the like. The format and its optimizations are designed around our perception of photos.
 
