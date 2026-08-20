@@ -16,11 +16,14 @@ import Layout from "../layouts/Layout.astro";
     <Greetings greeting="Work" />
   </Header>
   <main class="page-content">
-    <p>
-      Alternatively, you can download a more traditional PDF résumé <AnimatedLink
-        href="/Resume_Guillaume_Técher.pdf">here</AnimatedLink
-      >.
-    </p>
+    <div class="note">
+      <BodyText>
+        Alternatively, you can download a more traditional PDF résumé <AnimatedLink
+          href="/Resume_Guillaume_Técher.pdf">here</AnimatedLink
+        >.
+      </BodyText>
+    </div>
+
     <section>
       <h3>Radio-Canada</h3>
 
@@ -33,8 +36,8 @@ import Layout from "../layouts/Layout.astro";
         (admin view, special layouts, and more), migrations, and helping guide the
         work on accessibility. We took it from the prototype stage to a reliable and
         maintainable tool, with the hope of open-sourcing it. We nearly doubled the
-        number of interactions (comments and reactions) on our platform compared to the
-        industry average.
+        number of interactions (comments and reactions) on our platform compared to
+        the industry average.
       </BodyText>
       <h4>Digital production studio:</h4>
       <BodyText>
@@ -65,8 +68,8 @@ import Layout from "../layouts/Layout.astro";
         Dialogue, a telemedicine company, acquired Botfront in 2021. We
         successfully integrated Botfront into Dialogue’s tech stack, improving
         how chatbots are visualized and empowering medical staff to edit them
-        directly. The import-export system I built became a cornerstone of
-        this work.
+        directly. The import-export system I built became a cornerstone of this
+        work.
       </BodyText>
       <Separator text="2021" />
     </section>
@@ -90,9 +93,10 @@ import Layout from "../layouts/Layout.astro";
       <h3>ESEO</h3>
       <h4>Master of Software Engineering :</h4>
       <BodyText>
-        Two years of mathematics, physics, and electronics (Classe préparatoire),
-        followed by three years of software engineering. Final-year project: a metro
-        network simulator that simulated millions of trips.
+        Two years of mathematics, physics, and electronics (Classe
+        préparatoire), followed by three years of software engineering.
+        Final-year project: a metro network simulator that simulated millions of
+        trips.
       </BodyText>
     </section>
   </main>
@@ -106,7 +110,7 @@ import Layout from "../layouts/Layout.astro";
     padding-bottom: 5rem;
   }
 
-  p {
+  div.note {
     font-style: italic;
     margin-top: 2rem;
     margin-bottom: 3rem;
